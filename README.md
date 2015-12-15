@@ -1,8 +1,11 @@
+ 
  # (interface) Model
+
  #### fields:
  * Начальные данные
  * Список (массив, множество, ...) статических элементов;
  * Список генераторов
+
  #### methods:
  * begin
  * start
@@ -11,8 +14,10 @@
  
  
  # (interface) StaticElements
+
  #### fields:
  * -
+
  #### methods:
  * doTake(T transact)
  * doDo()
@@ -20,14 +25,18 @@
  
  
  # (interface) Transact
+
  #### fields:
  * ...
+
  #### methods:
  * toChange()
  
  
  # Generator
+
  #### fields:
  * 
+
  #### methods:
  * 
