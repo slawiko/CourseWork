@@ -1,38 +1,37 @@
  ## Общая структура
 
- ### (interface) Model
- 
- ##### fields:
+
+ #### (interface) Model
+ ###### fields:
  * Начальные данные
  * Список (массив, множество, ...) статических элементов;
  * Список генераторов
- ##### methods:
+ ###### methods:
  * begin
  * start
  * stop
  * end
  
  
- ### (interface) StaticElements
- 
- ##### fields:
+ #### (interface) StaticElements
+ ###### fields:
  * -
- ##### methods:
+ ###### methods:
  * doTake(T transact)
  * doDo()
  * doGive()
  
  
- ### (interface) Transact
- 
- ##### fields:
+ #### (interface) Transact
+ ###### fields:
  * ...
- ##### methods:
+ ###### methods:
  * toChange()
  
  
- ### Generator
- ##### fields:
+ #### Generator
+ ###### fields:
  * 
- ##### methods:
+ ###### methods:
  * 
+ 
