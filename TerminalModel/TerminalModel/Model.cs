@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace Imitation
 {
-    class Program
+    class Model
     {
-        private Model model;
+        private List<StaticElement> staticElements;
 
-        static void Main(string[] args)
-        {
-            System.Console.WriteLine("Hello");
-        }
+        private void 
     }
 }

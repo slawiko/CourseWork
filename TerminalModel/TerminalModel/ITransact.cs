@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Imitation
 {
-    class Program
+    class Transact
     {
-        private Model model;
+        private int i;
 
-        static void Main(string[] args)
+        public bool toChange()
         {
-            System.Console.WriteLine("Hello");
+            this.i++;
+            return true;
         }
     }
 }
