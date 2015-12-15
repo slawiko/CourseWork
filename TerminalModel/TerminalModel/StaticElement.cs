@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Imitation
 {
-    class StaticElement
+    public class StaticElement
     {
         private Transact transact;
 
@@ -15,9 +15,9 @@ namespace Imitation
             this.transact = transaсt;
         }
 
-        public bool doDo()
+        public void doDo()
         {
-            return this.transact.toChange();
+            this.transact.data++;
         }
 
         public Transact doGive()
