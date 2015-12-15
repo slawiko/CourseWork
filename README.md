@@ -1,9 +1,9 @@
  # (interface) Model
 
  ### fields:
- * Начальные данные
- * Список (массив, множество, ...) статических элементов;
- * Список генераторов
+ * Start data
+ * List of static elements
+ * List of generators
 
  ### methods:
  * begin
