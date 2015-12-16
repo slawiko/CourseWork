@@ -8,30 +8,56 @@ namespace Imitation
 {
     public class Model
     {
-        private readonly List<StaticElement> staticElements;
-        private readonly List<Generator> generators;
+        // async/await?
+        private readonly List<StaticElement> _staticElements;
+        //private readonly List<Generator> generators;
+        private readonly Generator _generator;
 
-        public Model(List<StaticElement> staticElements, List<Generator> generators)
+        public Model(List<StaticElement> staticElements, Generator generator)
         {
-            this.staticElements = staticElements;
-            this.generators = generators;
+            this._staticElements = staticElements;
+            this._generator = generator;
 
-            HashSet<Transact> transacts = this.begin();
-            this.start(transacts);
+            this.Begin();
         }
-        private HashSet<Transact> begin()
+        private void Begin()
         {
-            HashSet<Transact> transacts = new HashSet<Transact>();
-            foreach (Generator generator in generators)
+            HashSet<Transact> startTransacts = _generator.GetTransacts(); // generate transacts
+
+            Console.WriteLine("Start transacts:"); // write statistics - another method or class
+            foreach (Transact transact in startTransacts)
             {
-                transacts.UnionWith(generator.getTransacts());
+                Console.WriteLine(transact);
+            }
+
+            HashSet<Transact> regeneratedTransacts = this.Start(startTransacts); // produce transacts
+            this.End(regeneratedTransacts);
+        }
+        private HashSet<Transact> Start(HashSet<Transact> startTransacts)
+        {
+            HashSet<Transact> transacts = startTransacts;
+            // асинхрронно!!! прогнать каждый транзакт через элементы
+            foreach (StaticElement staticElement in _staticElements)
+            {
+                HashSet<Transact> nextTransacts = new HashSet<Transact>();
+                foreach (Transact transact in transacts)
+                {
+                    Transact producedTransact = staticElement.ProduceTransact(transact);
+                    nextTransacts.Add(producedTransact);
+                }
+                transacts = nextTransacts;
             }
 
             return transacts;
         }
-        private void start(HashSet<Transact> transacts)
+
+        private void End(HashSet<Transact> transacts)
         {
-            // прогнать каждый транзакт через элементы
-        }
+            Console.WriteLine("Produced transacts:"); // write statistics - another method or class
+            foreach (Transact transact in transacts)
+            {
+                Console.WriteLine(transact);
+            }
+        } 
     }
 }

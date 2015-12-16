@@ -9,23 +9,24 @@ namespace Imitation
 {
     public class Generator
     {
-        private int number = 10;
+        private const int Number = 10;
         private HashSet<Transact> transacts;
 
         public Generator()
         {
-            while (transacts.Count < number)
+            this.transacts = new HashSet<Transact>();
+            while (transacts.Count < Number)
             {
-                transacts.Add(generateTransact());
+                transacts.Add(GenerateTransact());
             }
         }
 
-        private Transact generateTransact()
+        private Transact GenerateTransact()
         {
             return new Transact();
         }
 
-        public HashSet<Transact> getTransacts()
+        public HashSet<Transact> GetTransacts()
         {
             return this.transacts;
         }

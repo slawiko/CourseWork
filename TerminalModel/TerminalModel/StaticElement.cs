@@ -6,23 +6,37 @@ using System.Threading.Tasks;
 
 namespace Imitation
 {
-    public class StaticElement
+    public class StaticElement // some staticElement, like Queue, checkpoint, etc.
     {
-        private Transact transact;
+        // async/await?
+        //private Queue<Transact> queue;
+        private Transact _transact;
 
-        public void doTake(Transact transaсt)
+        public StaticElement()
         {
-            this.transact = transaсt;
+            this._transact = new Transact();
         }
 
-        public void doDo()
+        public Transact ProduceTransact(Transact transact)
         {
-            this.transact.data++;
+            this.DoTake(transact);
+            this.DoDo();
+            return this.DoGive();
         }
 
-        public Transact doGive()
+        private void DoTake(Transact transaсt)
         {
-            return this.transact;
+            this._transact = transaсt; // take _transact
+        }
+
+        private void DoDo()
+        {
+            this._transact.Data++; // change Data
+        }
+
+        private Transact DoGive()
+        {
+            return this._transact; // give produced(changed) _transact
         }
     }
 }
