@@ -3,32 +3,45 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Timers;
 using System.Threading.Tasks;
 
-namespace Imitation
+namespace Imitation.StaticElement
 {
     public class Generator
     {
-        private const int Number = 10;
-        private HashSet<Transact> transacts;
+        public delegate void AfterCreateTransact(Transact transact);
 
-        public Generator()
+        public event AfterCreateTransact CreationTransactEvent;
+
+        private double _interval;
+
+        public Generator(double interval)
         {
-            this.transacts = new HashSet<Transact>();
-            while (transacts.Count < Number)
+            this._interval = interval;
+        }
+
+        public void StartGenerator()
+        {
+            //Timer timer = new Timer();
+
+            //            while (true)
+            //            {
+            //                timer.Start();
+            //                Transact transact = new Transact();
+            //                if (CreationTransactEvent != null) CreationTransactEvent(transact);
+            //            }
+
+//            Console.WriteLine("Timer in generator starts");
+//            timer.Start();
+//            Console.WriteLine("Timer in generator ends");
+
+            Transact transact = new Transact(new Random());
+            if (CreationTransactEvent != null)
             {
-                transacts.Add(GenerateTransact());
+                Console.WriteLine("Generator creates transact {0}", transact);
+                CreationTransactEvent(transact);
             }
-        }
-
-        private Transact GenerateTransact()
-        {
-            return new Transact();
-        }
-
-        public HashSet<Transact> GetTransacts()
-        {
-            return this.transacts;
         }
     }
 }

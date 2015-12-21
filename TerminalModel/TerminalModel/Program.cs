@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Imitation.StaticElement;
 
 namespace Imitation
 {
@@ -10,16 +11,8 @@ namespace Imitation
     {
         public static void Main(string[] args)
         {
-            List<StaticElement> staticElements = new List<StaticElement>
-            {
-                new StaticElement(),
-                new StaticElement(),
-                new StaticElement()
-            };
+            Model model = new Model(1000, 1500);
 
-            Model model = new Model(staticElements, new Generator());
-            
-            System.Console.WriteLine("The end");
             System.Console.ReadKey();
         }
     }

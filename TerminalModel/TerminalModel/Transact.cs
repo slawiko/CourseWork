@@ -11,15 +11,14 @@ namespace Imitation
     {
         public int Data;
 
-        public Transact()
+        public Transact(Random random)
         {
-            Random randomData = new Random();
-            this.Data = randomData.Next(1, 20);
+            this.Data = random.Next(1, 100);
         }
 
         public override string ToString()
         {
-            return "Data: " + this.Data.ToString();
+            return this.Data.ToString();
         }
     }
 }
