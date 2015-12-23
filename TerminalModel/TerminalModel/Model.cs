@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Imitation.StaticElement;
 
@@ -9,11 +10,16 @@ namespace Imitation
 {
     public class Model
     {
-        public Model(double creationInterval, double serviceTime)
+        public Model()
         {
-            Generator generator = new Generator(creationInterval);
+            Start();
+        }
+
+        public void Start()
+        {
+            Generator generator = new Generator(1000);
             Queue queue = new Queue();
-            ServiceWindow service = new ServiceWindow(serviceTime);
+            ServiceWindow service = new ServiceWindow(1500);
             Sink sink = new Sink();
 
             generator.CreationTransactEvent += queue.EnterQueue;

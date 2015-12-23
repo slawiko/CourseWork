@@ -11,7 +11,7 @@ namespace Imitation
     {
         public static void Main(string[] args)
         {
-            Model model = new Model(1000, 1500);
+            Model model = new Model();
 
             System.Console.ReadKey();
         }
