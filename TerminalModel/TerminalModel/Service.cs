@@ -7,37 +7,27 @@ using System.Threading.Tasks;
 
 namespace Imitation
 {
-    class Service
+    public class Service : StaticElement
     {
-        public delegate void AfterLeaveService(Transact transact);
-        public delegate void AfterEnterService(); 
-
-        public event AfterLeaveService LeaveServiceEvent;
-        public event AfterEnterService EnterServiceEvent;
-
-        private double _serviceTime;
         private Transact _transact;
 
-        public Service(double serviceTime)
+        public Service(double delay)
         {
-            this._serviceTime = serviceTime;
-            EnterServiceEvent += LeaveService;
+            this.Delay = delay;
+            EnterEvent += Leave;
         }
 
-        public void EnterService(Transact transact)
+        public override void Enter(Transact transact)
         {
             this._transact = transact;
-            Console.WriteLine("Transact {0} enters service window", _transact);
-            if (EnterServiceEvent != null) EnterServiceEvent();
+            Console.WriteLine("Transact {0} enters service window", this._transact);
+            OnEnter();
         }
 
-        public void LeaveService()
+        public override void Leave()
         {
-            if (LeaveServiceEvent != null)
-            {
-                Console.WriteLine("Transact {0} leave service window", _transact);
-                LeaveServiceEvent(this._transact);
-            }
+            Console.WriteLine("Transact {0} leave service window", this._transact);
+            OnLeave(this._transact);
         }
     }
 }

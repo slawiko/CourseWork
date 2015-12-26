@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Imitation
 {
-    public class Generator
+    public class Generator 
     {
         public delegate void AfterCreateTransact(Transact transact);
 

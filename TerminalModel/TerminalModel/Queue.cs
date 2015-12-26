@@ -6,35 +6,31 @@ using System.Threading.Tasks;
 
 namespace Imitation
 {
-    public class Queue
+    public class Queue : StaticElement
     {
-        public delegate void AfterLeaveQueue(Transact transact);
-        public delegate void AfterEnterQueue();
-
-        public event AfterLeaveQueue LeaveQueueEvent;
-        public event AfterEnterQueue EnterQueueEvent;
-
         private Queue<Transact> _queue;
 
-        public Queue()
+        public Queue(double delay)
         {
             this._queue = new Queue<Transact>();
-            EnterQueueEvent += LeaveQueue;
+            this.Delay = delay;
+            EnterEvent += Leave;
         }
 
-        public void EnterQueue(Transact transact)
+        public override void Enter(Transact transact)
         {
             this._queue.Enqueue(transact);
             Console.WriteLine("Transact {0} enters queue", _queue.Peek());
-            if (EnterQueueEvent != null) EnterQueueEvent();
+            OnEnter();
+            
         }
 
-        public void LeaveQueue()
+        public override void Leave()
         {
-            if (LeaveQueueEvent != null && this._queue.Count > 0)
+            if (this._queue.Count > 0)
             {
-                Console.WriteLine("Transact {0} leaves queue", _queue.Peek());
-                LeaveQueueEvent(this._queue.Dequeue());
+                Console.WriteLine("Transact {0} leaves queue", this._queue.Peek());
+                OnLeave(this._queue.Dequeue());
             }
         }
     }
