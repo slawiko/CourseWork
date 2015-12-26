@@ -6,7 +6,7 @@ using System.Text;
 using System.Timers;
 using System.Threading.Tasks;
 
-namespace Imitation.StaticElement
+namespace Imitation
 {
     public class Generator
     {
@@ -23,19 +23,6 @@ namespace Imitation.StaticElement
 
         public void StartGenerator()
         {
-            //Timer timer = new Timer();
-
-            //            while (true)
-            //            {
-            //                timer.Start();
-            //                Transact transact = new Transact();
-            //                if (CreationTransactEvent != null) CreationTransactEvent(transact);
-            //            }
-
-//            Console.WriteLine("Timer in generator starts");
-//            timer.Start();
-//            Console.WriteLine("Timer in generator ends");
-
             Transact transact = new Transact(new Random());
             if (CreationTransactEvent != null)
             {

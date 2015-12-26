@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Imitation.StaticElement;
-
-namespace Imitation
+﻿namespace Imitation
 {
     public class Model
     {
@@ -19,12 +11,12 @@ namespace Imitation
         {
             Generator generator = new Generator(1000);
             Queue queue = new Queue();
-            ServiceWindow service = new ServiceWindow(1500);
+            Service service = new Service(1500);
             Sink sink = new Sink();
 
             generator.CreationTransactEvent += queue.EnterQueue;
-            queue.LeaveQueueEvent += service.EnterServiceWindow;
-            service.LeaveServiceWindowEvent += sink.CollectInfo;
+            queue.LeaveQueueEvent += service.EnterService;
+            service.LeaveServiceEvent += sink.CollectInfo;
 
             generator.StartGenerator();
         }

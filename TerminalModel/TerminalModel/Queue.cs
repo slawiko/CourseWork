@@ -4,16 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Imitation.StaticElement
+namespace Imitation
 {
     public class Queue
     {
         public delegate void AfterLeaveQueue(Transact transact);
-
-        public delegate void AfterEnterQueue();// I think this field is reduntant 
+        public delegate void AfterEnterQueue();
 
         public event AfterLeaveQueue LeaveQueueEvent;
-        public event AfterEnterQueue EnterQueueEvent;// I think this field is reduntant 
+        public event AfterEnterQueue EnterQueueEvent;
 
         private Queue<Transact> _queue;
 
@@ -32,11 +31,6 @@ namespace Imitation.StaticElement
 
         public void LeaveQueue()
         {
-            //            while (this._queue.Count > 0)
-            //            {
-            //                if (LeaveQueueEvent != null) LeaveQueueEvent(this._queue.Dequeue());
-            //            }
-
             if (LeaveQueueEvent != null && this._queue.Count > 0)
             {
                 Console.WriteLine("Transact {0} leaves queue", _queue.Peek());
