@@ -4,7 +4,7 @@
 	{
 		public delegate void AfterLeave(Transact transact);
 		public event AfterLeave LeaveEvent;
-		protected double Delay;
+		protected double Delay; 
 
 		public abstract void Enter(Transact transact);
 
