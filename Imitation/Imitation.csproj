@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Elements\Accumulator.cs" />
+    <Compile Include="Elements\Collector.cs" />
     <Compile Include="Elements\Enter.cs" />
     <Compile Include="Elements\Executor.cs" />
     <Compile Include="Elements\Service.cs" />
@@ -56,7 +57,7 @@
     <Compile Include="Model.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sink.cs" />
+    <Compile Include="Elements\Exit.cs" />
     <Compile Include="Elements\Element.cs" />
     <Compile Include="Transact.cs" />
   </ItemGroup>

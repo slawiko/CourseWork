@@ -11,11 +11,12 @@
 
 		public Service(double interval)
 		{
-			this._interval = interval;
+			this._interval = interval > 0 ? interval : 0;
 		}
 
 		public override void Execute()
 		{
+			System.Console.WriteLine("Service ready");
 			this.Ready();
 		}
 	}
