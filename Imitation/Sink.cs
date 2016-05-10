@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Imitation
+namespace Imitation.Elements
 {
-	class Sink
+	public class Sink : Collector
 	{
-		public void CollectInfo(Transact transact)
+		public override void Collect()
 		{
-			Console.WriteLine("Transact {0} leave model", transact);
+			this.Ready();
 		}
 	}
 }

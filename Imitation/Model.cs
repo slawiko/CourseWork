@@ -1,26 +1,28 @@
 ﻿using Imitation.Elements;
+using System.Collections.Generic;
 
 namespace Imitation
 {
 	public class Model
 	{
+		private Queue<Element> _elementQueue; 
+		
 		public Model()
 		{
-			Start();
+			this._elementQueue = new Queue<Element>();
+			InitModel();
 		}
 
-		public void Start()
+		public void InitModel()
 		{
-			Generator generator = new Generator(1000);
-			Queue queue = new Queue(0);
-			Service service = new Service(1500);
+			Generator enter = new Enter(1.0);
+			Accumulator queue = new Queue();
+			Executor service = new Service();
 			Sink sink = new Sink();
 
-			generator.CreationTransactEvent += queue.Enter;
-			queue.LeaveEvent += service.Enter;
-			service.LeaveEvent += sink.CollectInfo;
-
-			generator.StartGenerator();
+			enter.Next += queue.Enter;
+			queue.Next += service.Execute;
+			service.Next += sink.Collect;
 		}
 	}
 }

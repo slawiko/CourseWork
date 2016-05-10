@@ -1,28 +1,22 @@
-﻿using System;
-
-namespace Imitation.Elements
+﻿namespace Imitation.Elements
 {
-	public class Service : Element
+	public class Service : Executor
 	{
-		private Transact _transact;
+		private double _interval;
 
-		public Service(double delay)
+		public Service()
 		{
-			this.Delay = delay;
-			EnterEvent += Leave;
+			this._interval = 0;
 		}
 
-		public override void Enter(Transact transact)
+		public Service(double interval)
 		{
-			this._transact = transact;
-			Console.WriteLine("Transact {0} enters service window", this._transact);
-			OnEnter();
+			this._interval = interval;
 		}
 
-		public override void Leave()
+		public override void Execute()
 		{
-			Console.WriteLine("Transact {0} leave service window", this._transact);
-			OnLeave(this._transact);
+			this.Ready();
 		}
 	}
 }

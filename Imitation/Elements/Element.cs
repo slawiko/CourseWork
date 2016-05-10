@@ -2,15 +2,12 @@
 {
 	public abstract class Element
 	{
-		public delegate void AfterLeave(Transact transact);
-		public event AfterLeave LeaveEvent;
-		protected double Delay; 
+		public delegate void NextElement();
+		public virtual event NextElement Next;
 
-		public abstract void Enter(Transact transact);
-
-		protected virtual void OnLeave(Transact transact)
+		public virtual void Ready()
 		{
-			if (LeaveEvent != null) LeaveEvent(transact);
+			this.Next?.Invoke();
 		}
 	}
 }

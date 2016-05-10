@@ -1,34 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Imitation.Elements
 {
-	public class Queue : Element
+	public class Queue : Accumulator
 	{
 		private Queue<Transact> _queue;
+		private int _capacity;
 
-		public Queue(double delay)
+		public Queue()
 		{
 			this._queue = new Queue<Transact>();
-			this.Delay = delay;
-			EnterEvent += Leave;
+			this._capacity = -1;
 		}
 
-		public override void Enter(Transact transact)
+		public Queue(int capacity)
 		{
-			this._queue.Enqueue(transact);
-			Console.WriteLine("Transact {0} enters queue", _queue.Peek());
-			OnEnter();
-
+			this._queue = new Queue<Transact>();
+			this._capacity = capacity > 0 ? capacity : -1;
 		}
 
-		public override void Leave()
+		public override void Enter()
 		{
-			if (this._queue.Count > 0)
-			{
-				Console.WriteLine("Transact {0} leaves queue", this._queue.Peek());
-				OnLeave(this._queue.Dequeue());
-			}
+			this.Ready();
 		}
 	}
 }
