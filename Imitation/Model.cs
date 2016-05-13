@@ -12,7 +12,6 @@ namespace Imitation
 
 		public Model()
 		{
-			log.Info("Test");
 			this._elementQueue = new Queue<Element>();
 			this.Init();
 			this.Start();
