@@ -7,7 +7,7 @@
 
 		public virtual void Ready()
 		{
-			this.Next?.Invoke();
+			this.Next?.Invoke();//
 		}
 	}
 }
