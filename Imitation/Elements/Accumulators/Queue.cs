@@ -9,24 +9,32 @@
 		{
 			this._capacity = -1;
 			this._occupancy = 0;
+			this.Transacts = new System.Collections.Generic.Queue<Transact>();
 		}
 
 		public Queue(int capacity)
 		{
 			this._capacity = capacity > 0 ? capacity : -1;
 			this._occupancy = 0;
+			this.Transacts = new System.Collections.Generic.Queue<Transact>();
 		}
 
-		public override void Enter()
+		private bool IsFinite()
+		{
+			return this._capacity != -1 ? true : false;
+		}
+
+		public override Transact Enter(Transact transact)
 		{
 			if (this.Try())
 			{
-				System.Console.WriteLine("Queue ready");
-				this.Ready();
+				this.Transacts.Enqueue(transact);
+				this.Ready = true;
+				return this.Process(transact);
 			}
 			else 
 			{
-				// TODO
+				return null;
 			}
 		}
 
@@ -43,9 +51,10 @@
 			}
 		}
 
-		public override bool IsFinite()
+		public override Transact Process(Transact transact)
 		{
-			return this._capacity != -1 ? true : false;
+			transact.Time = 1.0; // !
+			return transact;
 		}
 	}
 }
