@@ -2,17 +2,13 @@
 {
 	public class Exit : Collector
 	{
-		public override Transact Collect(Transact transact)
+		public Exit()
 		{
-			System.Console.WriteLine("Exit ready");
-			this.Ready = true;
-			return transact; // ?
+			this.ReadyToGive = true;
 		}
-
-		public override Transact Process(Transact transact)
+		public override void Collect(Transact transact)
 		{
 			System.Console.WriteLine(transact);
-			return base.Process(transact);
 		}
 	}
 }

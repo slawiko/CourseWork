@@ -2,24 +2,20 @@
 {
 	public abstract class Element
 	{
-		public delegate Transact NextElement(Transact transact);
+		public delegate void NextElement(Transact transact);
 		public virtual event NextElement Next;
-		public virtual bool Ready { get; set; }
-		public virtual void Reset()
+		public virtual System.Collections.Generic.Queue<Transact> Transacts { get; set; }
+		public virtual bool ReadyToGive { get; set; }
+		//public virtual bool ReadyToTake { get; set; }
+		public virtual void Update()
 		{
-			this.Ready = false;
+			this.ReadyToGive = this.Transacts.Count > 0 ? true : false;
 		}
-		public virtual bool Try()
+		public virtual void Continue()
 		{
-			return true;
-		}
-		public virtual Transact Process(Transact transact)
-		{
-			return transact;
-		}
-		public virtual Transact Run(Transact transact)
-		{
-			return this.Next?.Invoke(transact);
+			System.Console.WriteLine(this + " call Continue");
+			this.Next.Invoke(this.Transacts.Dequeue());
+			this.Update();
 		}
 	}
 }

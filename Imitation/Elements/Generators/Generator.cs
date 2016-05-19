@@ -2,8 +2,10 @@
 {
 	public abstract class Generator : Element
 	{
-		public abstract Transact Generate();
-		public abstract Transact Create();
-		public virtual int Count { get; set; }
+		public abstract void Generate();
+		public virtual Transact Create()
+		{
+			return new Transact(new System.Random(42));
+		}
 	}
 }

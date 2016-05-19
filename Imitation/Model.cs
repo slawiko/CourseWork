@@ -19,7 +19,7 @@ namespace Imitation
 		 
 		public void Init()
 		{
-			Generator enter = new Enter(1);
+			Generator enter = new Enter(3);
 			Accumulator queue = new Queue(10); 
 			Executor service = new Service();
 			Exit exit = new Exit();
@@ -28,6 +28,11 @@ namespace Imitation
 			enter.Next += queue.Enter;
 			queue.Next += service.Execute;
 			service.Next += exit.Collect;
+
+			this._elementQueue.Enqueue(enter);
+			this._elementQueue.Enqueue(queue);
+			this._elementQueue.Enqueue(service);
+			this._elementQueue.Enqueue(exit);
 		}
 
 		public void Start()
@@ -36,7 +41,7 @@ namespace Imitation
 			{
 				foreach (var item in this._elementQueue)
 				{
-					//if (item.Ready) item.Run()
+					if (item.ReadyToGive) item.Continue();
 				}
 			}
 		}
@@ -45,7 +50,7 @@ namespace Imitation
 		{
 			foreach (var item in this._elementQueue)
 			{
-				if (item.Ready) return true;
+				if (item.ReadyToGive) return true;
 			}
 			return false;
 		}

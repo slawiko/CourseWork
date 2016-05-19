@@ -4,60 +4,67 @@
 	{
 		private int _num;
 		private double _delay;
-		//private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-		public Enter()
+		/*public Enter()
 		{
-			this._num = 1;
+			this._num = -1;
 			this._delay = 0;
-			this.Count = 0;
-		}
+			this.Transacts = new System.Collections.Generic.Queue<Transact>();
+			for (var i = 0; i < this._num; i++)
+			{
+				this.Generate();
+			}
+		}*/
 
 		public Enter(int num)
 		{
 			this._num = num > 0 ? num : 1;
 			this._delay = 0;
-			this.Count = 0;
+			this.Transacts = new System.Collections.Generic.Queue<Transact>();
+			for (var i = 0; i < this._num; i++)
+			{
+				this.Generate();
+			}
 		}
 
 		public Enter(double delay)
 		{
 			this._num = 1;
 			this._delay = delay > 0 ? delay : 0;
-			this.Count = 0;
+			this.Transacts = new System.Collections.Generic.Queue<Transact>();
+			for (var i = 0; i < this._num; i++)
+			{
+				this.Generate();
+			}
 		}
 
-		public Enter(int num, double delay)
+		/*public Enter(int num, double delay)
 		{
-			this._num = num > 0 ? num : 1;
+			this._num = num > 0 ? num : -1;
 			this._delay = delay > 0 ? delay : 0;
-			this.Count = 0;
-		}
+			this.Transacts = new System.Collections.Generic.Queue<Transact>();
+			for (var i = 0; i < this._num; i++)
+			{
+				this.Generate();
+			}
+		}*/
 
-		public override Transact Generate()
+		public override void Generate()
 		{
 			if (this.Try())
 			{
-				this.Count++;
-				//log.Info(System.Reflection.MethodInfo.GetCurrentMethod() + " ready");
-				System.Console.WriteLine(System.Reflection.MethodInfo.GetCurrentMethod() + " ready");
-				this.Ready = true;
-				return this.Create();
+				this.Transacts.Enqueue(this.Create());
+				this.Update();
 			}
 			else
 			{
-				return null;
+				// TODO
 			}
 		}
 
-		public override Transact Create()
+		public bool Try()
 		{
-			return new Transact(new System.Random(42));
-		}
-
-		public override bool Try()
-		{
-			return this.Count <= this._num;
+			return this.Transacts.Count <= this._num;
 		}
 	}
 }

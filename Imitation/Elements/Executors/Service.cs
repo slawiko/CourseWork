@@ -16,29 +16,18 @@
 			this.Transacts = new System.Collections.Generic.Queue<Transact>();
 		}
 
-		public override Transact Execute(Transact transact)
+		public override void Execute(Transact transact)
 		{
 			if (this.Try())
-			{ 
-				System.Console.WriteLine("Service ready");
-				this.Ready = true;
-				return this.Process(transact);
-			}
-			else 
 			{
-				return null;
+				this.Transacts.Enqueue(transact);
+				this.Update();
 			}
 		}
 
-		public override bool Try()
+		public bool Try()
 		{
 			return this.Transacts.Count == 0;
-		}
-
-		public override Transact Process(Transact transact)
-		{
-			transact.Time = this._interval;
-			return transact;
 		}
 	}
 }

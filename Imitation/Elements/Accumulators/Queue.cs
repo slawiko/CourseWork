@@ -24,21 +24,20 @@
 			return this._capacity != -1 ? true : false;
 		}
 
-		public override Transact Enter(Transact transact)
+		public override void Enter(Transact transact)
 		{
 			if (this.Try())
 			{
 				this.Transacts.Enqueue(transact);
-				this.Ready = true;
-				return this.Process(transact);
+				this.Update();
 			}
-			else 
+			else
 			{
-				return null;
+				// TODO
 			}
 		}
 
-		public override bool Try()
+		public bool Try()
 		{
 			if ((this._capacity > this._occupancy) || !this.IsFinite())
 			{
@@ -49,12 +48,6 @@
 			{
 				return false;
 			}
-		}
-
-		public override Transact Process(Transact transact)
-		{
-			transact.Time = 1.0; // !
-			return transact;
 		}
 	}
 }
