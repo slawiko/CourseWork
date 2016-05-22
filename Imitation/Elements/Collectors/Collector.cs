@@ -2,7 +2,7 @@
 {
 	public abstract class Collector : Element
 	{
-		public event NextElement Next = null;
+		public event NextElement FNext = null;
 		public abstract void Collect(Transact transact);
 		public override void Continue()
 		{
