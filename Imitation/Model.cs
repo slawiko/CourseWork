@@ -7,8 +7,6 @@ namespace Imitation
 	{
 		private Queue<Element> _elementQueue;
 		private Generator _entry;
-		//private static readonly log4net.ILog log =
-		//			log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 		public Model()
 		{
@@ -37,7 +35,7 @@ namespace Imitation
 
 		public void Start()
 		{
-			while (this.IsReady())
+			while (this.HasReady())
 			{
 				foreach (var item in this._elementQueue)
 				{
@@ -46,7 +44,7 @@ namespace Imitation
 			}
 		}
 
-		private bool IsReady()
+		private bool HasReady()
 		{
 			foreach (var item in this._elementQueue)
 			{
