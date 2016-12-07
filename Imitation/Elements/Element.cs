@@ -9,7 +9,7 @@
 		//public virtual bool ReadyToTake { get; set; }
 		public virtual void Update()
 		{
-			this.ReadyToGive = this.Transacts.Count > 0 ? true : false;
+			this.ReadyToGive = this.Transacts.Count > 0;
 		}
 		public virtual void Continue()
 		{

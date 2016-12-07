@@ -18,11 +18,9 @@
 
 		public override void Execute(Transact transact)
 		{
-			if (this.Try())
-			{
-				this.Transacts.Enqueue(transact);
-				this.Update();
-			}
+			if (!this.Try()) return;
+			this.Transacts.Enqueue(transact);
+			this.Update();
 		}
 
 		public bool Try()
