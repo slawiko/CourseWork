@@ -1,12 +1,11 @@
 ﻿namespace Imitation.Elements
 {
-	public abstract class Collector : Element
+	public abstract class Collector : Element, ITaker
 	{
-		public event NextElement Next = null;
-		public abstract void Collect(Transact transact);
-		public override void Continue()
+		public event TakeDelegate ReadyTotake;
+		public void Take(Transact transact)
 		{
-			return;
+			throw new System.NotImplementedException();
 		}
 	}
 }

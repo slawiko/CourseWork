@@ -1,11 +1,12 @@
 ﻿namespace Imitation.Elements
 {
-	public abstract class Generator : Element
+	public abstract class Generator : Element, IGiver
 	{
 		public abstract void Generate();
-		public virtual Transact Create()
+		public event GiveDelegate ReadyToGive;
+		public Transact Give()
 		{
-			return new Transact(new System.Random(42));
+			throw new System.NotImplementedException();
 		}
 	}
 }
