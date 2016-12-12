@@ -241,6 +241,7 @@ _Pvt_Extensions
 # User-specific stuff:
 .idea/workspace.xml
 .idea/tasks.xml
+.idea
 
 # Sensitive or high-churn files:
 .idea/dataSources/
