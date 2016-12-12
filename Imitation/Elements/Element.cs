@@ -5,8 +5,8 @@
 		public delegate void GiveDelegate(Transact transact);
 		public delegate Transact TakeDelegate();
 
-		protected virtual System.Collections.Generic.HashSet<Transact> Transacts { get; set; }
+		public virtual System.Collections.Generic.Queue<Transact> Transacts { get; set; }
 
-		protected abstract void Process();
+		public abstract void Process();
 	}
 }

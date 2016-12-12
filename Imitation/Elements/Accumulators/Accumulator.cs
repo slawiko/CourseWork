@@ -1,4 +1,5 @@
-﻿namespace Imitation.Elements
+﻿/*
+namespace Imitation.Elements
 {
 	public abstract class Accumulator : Element, ITaker, IGiver
 	{
@@ -9,3 +10,4 @@
 		public abstract Transact Give();
 	}
 }
+*/

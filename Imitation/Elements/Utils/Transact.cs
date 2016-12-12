@@ -5,20 +5,27 @@
 		public int Data;
 		public double Time
 		{
-			get { return this._time; }
-			set { this._time += value; }
+			get { return _time; }
+			set { _time += value; }
 		}
 		private double _time;
 
+		public string History
+		{
+			get { return _history; }
+			set { _history = value; }
+		}
+		private string _history;
+
 		public Transact(System.Random random)
 		{
-			this._time = 0;
-			this.Data = random.Next(1, 100);
+			_time = 0;
+			Data = random.Next(1, 100);
 		}
 
 		public override string ToString()
 		{
-			return this.Data.ToString();
+			return "History: " + History + "\nData: " + Data;
 		}
 	}
 }

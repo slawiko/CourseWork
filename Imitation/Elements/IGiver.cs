@@ -3,6 +3,6 @@
 	public interface IGiver
 	{
 		event Element.GiveDelegate ReadyToGive;
-		Transact Give();
+		void Give();
 	}
 }

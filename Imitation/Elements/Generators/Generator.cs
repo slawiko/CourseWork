@@ -3,6 +3,12 @@
 	public abstract class Generator : Element, IGiver
 	{
 		public event GiveDelegate ReadyToGive;
-		public abstract Transact Give();
+		public virtual void Give()
+		{
+			if (ReadyToGive != null)
+			{
+				ReadyToGive(Transacts.Dequeue());
+			}
+		}
 	}
 }
