@@ -3,10 +3,16 @@
 	public abstract class Executor : Element, ITaker, IGiver
 	{
 		public event TakeDelegate ReadyTotake;
-		public abstract void Take(Transact transact);
+		public void Take(Transact transact)
+		{
+			Transacts.Enqueue(transact);
+		}
 
 		public event GiveDelegate ReadyToGive;
-		public abstract Transact Give();
+		public void Give()
+		{
+			throw new System.NotImplementedException();
+		}
 	}
 }
 
