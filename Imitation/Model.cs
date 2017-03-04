@@ -19,7 +19,11 @@ namespace Imitation
 	public class Model
 	{
 		private Queue<Element> _elementQueue;
+<<<<<<< HEAD
 		private Generator _entry;
+=======
+
+>>>>>>> rebuilding
 		public Model()
 		{
 			this._elementQueue = new Queue<Element>();
@@ -29,24 +33,18 @@ namespace Imitation
 		 
 		public void Init()
 		{
-			Generator enter = new Enter(3);
-			Accumulator queue = new Queue(10); 
-			Executor service = new Service();
+			Generator enter = new Enter(3, 3.0); // 3 transact each 3 seconds
 			Exit exit = new Exit();
 
-			this._entry = enter;
-			enter.Next += queue.Enter;
-			queue.Next += service.Execute;
-			service.Next += exit.Collect;
+			enter.ReadyToGive += exit.Take;
 
 			this._elementQueue.Enqueue(enter);
-			this._elementQueue.Enqueue(queue);
-			this._elementQueue.Enqueue(service);
 			this._elementQueue.Enqueue(exit);
 		}
 
 		public void Start()
 		{
+<<<<<<< HEAD
 			while (this.HasReady())
 			{
 				foreach (var item in this._elementQueue)
@@ -63,6 +61,11 @@ namespace Imitation
 				if (item.ReadyToGive) return true;
 			}
 			return false;
+=======
+			var firstElement = this._elementQueue.Dequeue();
+
+			firstElement.Process();
+>>>>>>> rebuilding
 		}
 	}
 }

@@ -1,70 +1,49 @@
-﻿namespace Imitation.Elements
+﻿using System;
+using System.Collections.Generic;
+
+namespace Imitation.Elements
 {
-	public class Enter : Generator
+	public sealed class Enter : Generator
 	{
 		private int _num;
 		private double _delay;
-
-		/*public Enter()
-		{
-			this._num = -1;
-			this._delay = 0;
-			this.Transacts = new System.Collections.Generic.Queue<Transact>();
-			for (var i = 0; i < this._num; i++)
-			{
-				this.Generate();
-			}
-		}*/
+		private Random _random;
+		//TODO: each element will have Distribution law
+		//private bool Distribution;
 
 		public Enter(int num)
 		{
-			this._num = num > 0 ? num : 1;
-			this._delay = 0;
-			this.Transacts = new System.Collections.Generic.Queue<Transact>();
-			for (var i = 0; i < this._num; i++)
-			{
-				this.Generate();
-			}
+			Transacts = new Queue<Transact>();
+			_num = num;
+			_delay = -1;
+			_random = new Random();
 		}
 
 		public Enter(double delay)
 		{
-			this._num = 1;
-			this._delay = delay > 0 ? delay : 0;
-			this.Transacts = new System.Collections.Generic.Queue<Transact>();
-			for (var i = 0; i < this._num; i++)
-			{
-				this.Generate();
-			}
+			Transacts = new Queue<Transact>();
+			_num = -1;
+			_delay = delay;
+			_random = new Random();
 		}
 
-		/*public Enter(int num, double delay)
+		public Enter(int num, double delay)
 		{
-			this._num = num > 0 ? num : -1;
-			this._delay = delay > 0 ? delay : 0;
-			this.Transacts = new System.Collections.Generic.Queue<Transact>();
-			for (var i = 0; i < this._num; i++)
-			{
-				this.Generate();
-			}
-		}*/
-
-		public override void Generate()
-		{
-			if (this.Try())
-			{
-				this.Transacts.Enqueue(this.Create());
-				this.Update();
-			}
-			else
-			{
-				// TODO
-			}
+			Transacts = new Queue<Transact>();
+			_num = num;
+			_delay = delay;
+			_random = new Random();
 		}
 
-		public bool Try()
+		public override void Process()
 		{
-			return this.Transacts.Count <= this._num;
+			for (var i = 0; i < _num; i++)
+			{
+				var transact = new Transact(_random);
+				transact.History += "It's a " + i + " created transact. ";
+				Transacts.Enqueue(transact);
+				Give();
+			}
 		}
 	}
 }

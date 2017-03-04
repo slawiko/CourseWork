@@ -1,4 +1,5 @@
-﻿namespace Imitation.Elements
+﻿/*
+namespace Imitation.Elements
 {
 	public class Queue : Accumulator
 	{
@@ -51,3 +52,4 @@
 		}
 	}
 }
+*/
