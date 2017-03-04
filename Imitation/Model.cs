@@ -19,11 +19,7 @@ namespace Imitation
 	public class Model
 	{
 		private Queue<Element> _elementQueue;
-<<<<<<< HEAD
-		private Generator _entry;
-=======
 
->>>>>>> rebuilding
 		public Model()
 		{
 			this._elementQueue = new Queue<Element>();
@@ -44,28 +40,9 @@ namespace Imitation
 
 		public void Start()
 		{
-<<<<<<< HEAD
-			while (this.HasReady())
-			{
-				foreach (var item in this._elementQueue)
-				{
-					if (item.ReadyToGive) item.Continue();
-				}
-			}
-		}
-
-		private bool HasReady()
-		{
-			foreach (var item in this._elementQueue)
-			{
-				if (item.ReadyToGive) return true;
-			}
-			return false;
-=======
 			var firstElement = this._elementQueue.Dequeue();
 
 			firstElement.Process();
->>>>>>> rebuilding
 		}
 	}
 }
