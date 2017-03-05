@@ -2,7 +2,6 @@
 {
 	public interface IGiver
 	{
-		event Element.GiveDelegate ReadyToGive;
-		void Give();
+		Transact Exit();
 	}
 }

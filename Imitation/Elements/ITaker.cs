@@ -2,7 +2,6 @@
 {
 	public interface ITaker
 	{
-		event Element.TakeDelegate ReadyTotake;
-		void Take(Transact transact);
+		void Enter(Transact transact);
 	}
 }
