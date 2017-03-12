@@ -26,6 +26,6 @@
 		protected abstract Transact Transact { get; set; }
 		public abstract int Next { get; protected set; }
 
-		public abstract void Process();
+		public abstract void Process(int time);
 	}
 }

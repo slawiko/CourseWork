@@ -1,48 +1,34 @@
-﻿using System;
-
-namespace Imitation.Elements
+﻿namespace Imitation.Elements
 {
 	public sealed class Enter : Generator
 	{
+		private Transact _transact;
+		private int _next;
+		protected override Transact Transact 
+		{ 
+			get { return this._transact; }
+			set { this._transact = value; } 
+		}
+
+		public override int Next
+		{
+			get { return this._next; }
+			protected set { this._next = value; }
+		}
+
 		Enter(int delay)
 		{
 			this.Next = delay;
 		}
 
-		public override int Next
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-
-			protected set
-			{
-				throw new NotImplementedException();
-			}
-		}
-
-		protected override Transact Transact
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
-
 		public override Transact Exit()
 		{
-			throw new NotImplementedException();
+			return this.Transact;
 		}
 
-		public override void Process()
+		public override void Process(int time)
 		{
-			throw new NotImplementedException();
+			this.Transact.Time = time;
 		}
 	}
 }

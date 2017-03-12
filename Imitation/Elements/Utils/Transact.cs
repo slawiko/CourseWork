@@ -1,31 +1,26 @@
-﻿namespace Imitation
+﻿using System.Collections.Generic;
+
+namespace Imitation
 {
 	public class Transact
 	{
-		public int Data;
-		public double Time
+		private int _data;
+		private List<int> _time;
+		public int Time
 		{
-			get { return _time; }
-			set { _time += value; }
+			get { return this._time[this._time.Count - 1]; }
+			set { this._time.Add(value); }
 		}
-		private double _time;
-
-		public string History
-		{
-			get { return _history; }
-			set { _history = value; }
-		}
-		private string _history;
 
 		public Transact(System.Random random)
 		{
-			_time = 0;
-			Data = random.Next(1, 100);
+			this._time = new List<int>();
+			this._data = random.Next(1, 100);
 		}
 
 		public override string ToString()
 		{
-			return "History: " + History + "\nData: " + Data;
+			return "Time: " + this._time.ToString() + "\nData: " + this._data;
 		}
 	}
 }

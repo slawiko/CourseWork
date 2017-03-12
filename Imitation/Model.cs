@@ -7,7 +7,7 @@ namespace Imitation
 	{
 		private List<Element> _elementQueue;
 		private List<Element> _elementAction;
-		private int Time;
+		public int Time { get; private set; }
 
 		public Model()
 		{
@@ -27,13 +27,13 @@ namespace Imitation
 			this._elementQueue.Enqueue(exit);
 		}
 
-		public void Process()
+		public void Run()
 		{
 			while(this.Check())
 			{
 				foreach(var element in _elementAction)
 				{
-					element.Process();
+					element.Process(this.Time);
 				}
 			}
 		}
@@ -52,6 +52,7 @@ namespace Imitation
 					this._elementAction.Add(element);
 				}
 			}
+			this.Time += min;
 
 			return this._elementAction.Count > 0;
 		}
