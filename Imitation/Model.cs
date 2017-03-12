@@ -12,20 +12,28 @@ namespace Imitation
 		public Model()
 		{
 			this._elementQueue = new List<Element>();
+			this._elementAction = new List<Element>();
 			this.Time = 0;
 			this.InitModel();
+			this.Run();
 		}
 
 		public void InitModel()
 		{
-			Generator enter = new Enter(3, 3.0); // 3 transact each 3 seconds
-			Exit exit = new Exit();
+			Generator enter = new Enter(5);
+			Executor service = new Service(8);
+			Collector exit = new Exit(0);
 
-			enter.ReadyToGive += exit.Take;
+			enter.Out += service.Enter;
+			service.In += enter.Exit;
 
-			this._elementQueue.Enqueue(enter);
-			this._elementQueue.Enqueue(exit);
-		}
+			service.Out += exit.Enter;
+			exit.In += service.Exit;
+
+			this._elementQueue.Add(enter);
+			this._elementQueue.Add(service);
+			this._elementQueue.Add(exit);
+		}	
 
 		public void Run()
 		{
@@ -43,7 +51,7 @@ namespace Imitation
 			int min = this._elementQueue[0].Next;
 			foreach(var element in _elementQueue)
 			{
-				if (element.Next < min)
+				if (element.Next < min && element.Next >= 0)
 				{
 					this._elementAction.Clear();
 					min = element.Next;
@@ -52,9 +60,18 @@ namespace Imitation
 					this._elementAction.Add(element);
 				}
 			}
-			this.Time += min;
+			this.Increment(min);
 
 			return this._elementAction.Count > 0;
+		}
+
+		private void Increment(int incr)
+		{
+			this.Time += incr;
+			foreach(var element in _elementQueue)
+			{
+				element.Next -= incr;
+			}
 		}
 	}
 }

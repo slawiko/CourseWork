@@ -2,22 +2,37 @@
 {
 	public sealed class Enter : Generator
 	{
-		private Transact _transact;
+		public override In In { get; set; }
+		public override Out Out { get; set; }
+
+		protected override Transact Transact { get; set; }
+
 		private int _next;
-		protected override Transact Transact 
+		public override int Next 
 		{ 
-			get { return this._transact; }
-			set { this._transact = value; } 
+			get
+			{
+				return this._next;
+			} 
+			set
+			{
+				if (value != 0)
+				{
+					this._next = value;
+				}
+				else 
+				{
+					this._next = this.Delay;
+				}
+			}
 		}
+		public override int Delay { get; protected set; }
 
-		public override int Next
+		public Enter(int delay)
 		{
-			get { return this._next; }
-			protected set { this._next = value; }
-		}
-
-		Enter(int delay)
-		{
+			var random = new System.Random(2);
+			this.Transact = new Transact(random);
+			this.Delay = delay;
 			this.Next = delay;
 		}
 
@@ -29,6 +44,7 @@
 		public override void Process(int time)
 		{
 			this.Transact.Time = time;
+			this.Out(this.Exit());
 		}
 	}
 }

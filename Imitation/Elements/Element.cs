@@ -17,14 +17,19 @@
 	/// 2) Модель выбирает один(или несколько, если одновременно готовы несколько) элементов с наименьшим заявленным временем смены состояния.
 	/// 3) Для них вызывается метод Process, в который передается текущее модельное время. Его задача переместить необходимые транзакты со входа(входов) элемента(или создать новые – если генератор, или создать копии и т.д.) на вход следующего в цепочке.
 	/// 4) Переходим к пункту 1
+	
+	public delegate Transact In();
+	public delegate void Out(Transact transact);
 
 	public abstract class Element
 	{
-		public delegate void In(Transact transact);
-		public delegate Transact Out();
+		public abstract In In { get; set; }
+		public abstract Out Out { get; set; }
 
 		protected abstract Transact Transact { get; set; }
-		public abstract int Next { get; protected set; }
+
+		public abstract int Next { get; set; }
+		public abstract int Delay { get; protected set; }
 
 		public abstract void Process(int time);
 	}

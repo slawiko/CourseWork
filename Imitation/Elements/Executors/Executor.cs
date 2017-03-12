@@ -6,4 +6,3 @@
 		public abstract Transact Exit();
 	}
 }
-
