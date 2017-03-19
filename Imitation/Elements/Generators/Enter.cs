@@ -1,7 +1,7 @@
 ﻿namespace Imitation.Elements
 {
 	// TODO: rename Enter class
-	public sealed class Enter : Generator
+	public class Enter : Generator
 	{
 		public Enter(int delay)
 		{

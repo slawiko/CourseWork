@@ -4,13 +4,13 @@
 	{
 		public virtual Transact Exit()
 		{
+			this.Next = 0;
 			return this.Transact;
 		}
 
-		public new virtual void Process(int time)
+		public override void Process(int time)
 		{
 			this.Transact.Time = time;
-			this.Next = 0;
 			this.Out(this.Exit());
 		}
 	}

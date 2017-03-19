@@ -53,7 +53,6 @@
 		public virtual void Process(int time)
 		{
 			this.Transact.Time = time;
-			this.Next = 0;
 		}
 	}
 }
