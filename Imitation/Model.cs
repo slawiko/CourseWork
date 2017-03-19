@@ -5,14 +5,17 @@ using System.Linq;
 
 public class Model
 {
-	private List<Element> _elementQueue;
-	private List<Element> _elementAction;
+	private List<Element> ElementsList;
+	private List<Element> ActionList;
+	private List<Element> WaitingList;
+
 	public int Time { get; private set; }
 
 	public Model()
 	{
-		this._elementQueue = new List<Element>();
-		this._elementAction = new List<Element>();
+		this.ElementsList = new List<Element>();
+		this.ActionList = new List<Element>();
+		this.WaitingList = new List<Element>();
 		this.Time = 0;
 		this.InitModel();
 		this.Run();
@@ -25,14 +28,14 @@ public class Model
 		Collector exit = new Exit(0);
 
 		enter.Out += service.Enter;
-		service.In += enter.Exit;
-
 		service.Out += exit.Enter;
+
+		service.In += enter.Exit;
 		exit.In += service.Exit;
 
-		this._elementQueue.Add(enter);
-		this._elementQueue.Add(service);
-		this._elementQueue.Add(exit);
+		this.ElementsList.Add(enter);
+		this.ElementsList.Add(service);
+		this.ElementsList.Add(exit);
 	}	
 
 	public void Run()
@@ -40,10 +43,6 @@ public class Model
 		int nextTick = this.NextTick();
 		while(nextTick > 0)
 		{
-			foreach(var element in _elementAction)
-			{
-				element.Process(this.Time);
-			}
 			this.Increment(nextTick);
 			nextTick = this.NextTick();
 		}
@@ -53,17 +52,32 @@ public class Model
 
 	private int NextTick()
 	{
-		int min = this._elementQueue[0].Next;
-		this._elementAction.Clear();
-		foreach(var element in _elementQueue)
+		this.ActionList.Clear();
+		this.WaitingList.Clear();
+
+		int min = this.ElementsList[0].Next;
+
+		foreach(var element in this.ElementsList)
 		{
-			if (element.Next < min && element.Next >= 0)
+			// TODO: refactor this
+			if (element.Next < 0)
 			{
-				this._elementAction.Clear();
+				break;
+			}
+			if (element.Next < min)
+			{
+				this.WaitingList.AddRange(this.ActionList);
+				this.ActionList.Clear();
 				min = element.Next;
-				this._elementAction.Add(element);
-			} else if (element.Next == min) {
-				this._elementAction.Add(element);
+				this.ActionList.Add(element);
+			} 
+			else if (element.Next == min)
+			{
+				this.ActionList.Add(element);
+			} 
+			else 
+			{
+				this.WaitingList.Add(element);
 			}
 		}
 
@@ -71,11 +85,25 @@ public class Model
 	}
 
 	private void Increment(int incr)
-	{	
+	{
 		this.Time += incr;
-		foreach(var element in _elementQueue.Except(this._elementAction))
+		this.Wait(incr);
+		this.Action(incr);
+	}
+
+	private void Wait(int incr)
+	{	
+		foreach(var element in this.WaitingList)
 		{
 			element.Next -= incr;
+		}
+	}
+
+	private void Action (int incr)
+	{
+		foreach (var element in this.ActionList)
+		{
+			element.Process(this.Time);
 		}
 	}
 }

@@ -3,12 +3,20 @@
 	// TODO: rename Enter class
 	public class Enter : Generator
 	{
+		private System.Random random;
+
 		public Enter(int delay)
 		{
-			var random = new System.Random(2);
-			this.Transact = new Transact(random);
+			this.random = new System.Random(delay);
+			this.Transact = new Transact(this.random);
 			this.Delay = delay;
 			this.Next = delay;
+		}
+
+		public override void Process(int time)
+		{
+			this.Transact = new Transact(random);
+			this.Out(this.Exit());
 		}
 	}
 }

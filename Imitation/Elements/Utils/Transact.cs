@@ -12,6 +12,11 @@ namespace Imitation
 			set { this._time.Add(value); }
 		}
 
+		public Transact()
+		{
+			this._time = new List<int>();
+			this._data = -1;
+		}
 		public Transact(System.Random random)
 		{
 			this._time = new List<int>();

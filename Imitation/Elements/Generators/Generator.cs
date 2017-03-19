@@ -10,7 +10,7 @@
 
 		public override void Process(int time)
 		{
-			this.Transact.Time = time;
+			this.Transact = new Transact();
 			this.Out(this.Exit());
 		}
 	}
