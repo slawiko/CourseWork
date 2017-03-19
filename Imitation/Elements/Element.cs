@@ -26,7 +26,7 @@
 		public virtual In In { get; set; }
 		public virtual Out Out { get; set; }
 
-		protected virtual Transact Transact { get; set; }
+		public virtual Transact Transact { get; protected set; }
 
 		protected int _next;
 		public virtual int Next
@@ -52,7 +52,7 @@
 
 		public virtual void Process(int time)
 		{
-			this.Transact.Time = time;
+			this.Transact.LifeTime = "Processed in Element at " + time;
 		}
 	}
 }

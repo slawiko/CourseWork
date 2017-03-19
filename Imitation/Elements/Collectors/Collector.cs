@@ -10,9 +10,10 @@
 
 		public override void Process(int time)
 		{
-			this.Transact.Time = time;
-			// TODO: to think about it
+			this.Transact.LifeTime = "Processed in Collector at " + time;
+			System.Console.WriteLine(this.Transact);
 			this.Transact = null;
+			this.Next = -1;
 		}
 	}
 }

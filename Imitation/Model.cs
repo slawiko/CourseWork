@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 
-
 public class Model
 {
 	private List<Element> ElementsList;
@@ -23,7 +22,7 @@ public class Model
 
 	public void InitModel()
 	{
-		Generator enter = new Enter(5);
+		Generator enter = new Enter(5, 3);
 		Executor service = new Service(8);
 		Collector exit = new Exit(0);
 
@@ -41,7 +40,7 @@ public class Model
 	public void Run()
 	{
 		int nextTick = this.NextTick();
-		while(nextTick > 0)
+		while(nextTick >= 0)
 		{
 			this.Increment(nextTick);
 			nextTick = this.NextTick();
@@ -55,14 +54,14 @@ public class Model
 		this.ActionList.Clear();
 		this.WaitingList.Clear();
 
-		int min = this.ElementsList[0].Next;
+		int min = this.FirstPositive();
 
 		foreach(var element in this.ElementsList)
 		{
 			// TODO: refactor this
 			if (element.Next < 0)
 			{
-				break;
+				continue;
 			}
 			if (element.Next < min)
 			{
@@ -99,11 +98,22 @@ public class Model
 		}
 	}
 
-	private void Action (int incr)
+	private void Action(int incr)
 	{
 		foreach (var element in this.ActionList)
 		{
 			element.Process(this.Time);
 		}
+	}
+
+	private int FirstPositive()
+	{
+		// TODO: refactor it
+		var temp = this.ElementsList.Where(element => element.Next >= 0).ToList();
+		if (temp.Count > 0)
+		{
+			return temp[0].Next;
+		}
+		return -1;
 	}
 }

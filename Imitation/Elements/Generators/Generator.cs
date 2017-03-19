@@ -4,14 +4,26 @@
 	{
 		public virtual Transact Exit()
 		{
+			var transact = this.Transact;
+			this.Transact = null;
 			this.Next = 0;
-			return this.Transact;
+			return transact;
 		}
 
 		public override void Process(int time)
 		{
 			this.Transact = new Transact();
-			this.Out(this.Exit());
+			this.Transact.LifeTime = "Processed in Generator at " + time;
+			// TODO: think about it
+			var temp = this.Exit();
+			try
+			{
+				this.Out(temp);
+			}
+			catch (System.Exception)
+			{
+				System.Console.WriteLine(temp + " skipped by " + this);
+			}
 		}
 	}
 }
