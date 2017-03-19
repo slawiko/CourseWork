@@ -8,7 +8,6 @@
 		public Enter(int delay)
 		{
 			this.random = new System.Random(delay);
-			this.Transact = new Transact(this.random);
 			this.Delay = delay;
 			this.Next = delay;
 		}
