@@ -1,5 +1,6 @@
 ﻿using Imitation.Elements;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Imitation
 {
@@ -37,16 +38,21 @@ namespace Imitation
 
 		public void Run()
 		{
-			while(this.Check())
+			int nextTick = this.NextTick();
+			while(nextTick > 0)
 			{
 				foreach(var element in _elementAction)
 				{
 					element.Process(this.Time);
 				}
+				this.Increment(nextTick);
+				nextTick = this.NextTick();
 			}
+
+			System.Console.WriteLine("Model finished");
 		}
 
-		private bool Check()
+		private int NextTick()
 		{
 			int min = this._elementQueue[0].Next;
 			foreach(var element in _elementQueue)
@@ -60,15 +66,16 @@ namespace Imitation
 					this._elementAction.Add(element);
 				}
 			}
-			this.Increment(min);
 
-			return this._elementAction.Count > 0;
+			return min;
 		}
 
 		private void Increment(int incr)
 		{
+			var test = new HashSet<Element>();
+			
 			this.Time += incr;
-			foreach(var element in _elementQueue)
+			foreach(var element in _elementQueue.Except(this._elementAction))
 			{
 				element.Next -= incr;
 			}

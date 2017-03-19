@@ -55,8 +55,6 @@
     <Compile Include="Elements\Executors\Service.cs" />
     <Compile Include="Elements\Generators\Enter.cs" />
     <Compile Include="Elements\Generators\Generator.cs" />
-    <Compile Include="Elements\IGiver.cs" />
-    <Compile Include="Elements\ITaker.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

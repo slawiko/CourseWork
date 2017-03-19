@@ -23,14 +23,37 @@
 
 	public abstract class Element
 	{
-		public abstract In In { get; set; }
-		public abstract Out Out { get; set; }
+		public virtual In In { get; set; }
+		public virtual Out Out { get; set; }
 
-		protected abstract Transact Transact { get; set; }
+		protected virtual Transact Transact { get; set; }
 
-		public abstract int Next { get; set; }
-		public abstract int Delay { get; protected set; }
+		protected int _next;
+		public virtual int Next
+		{
+			get
+			{
+				return this._next;
+			}
+			set
+			{
+				if (value != 0)
+				{
+					this._next = value;
+				}
+				else
+				{
+					this._next = this.Delay;
+				}
+			}
+		}
 
-		public abstract void Process(int time);
+		public virtual int Delay { get; protected set; }
+
+		public virtual void Process(int time)
+		{
+			this.Transact.Time = time;
+			this.Next = 0;
+		}
 	}
 }
