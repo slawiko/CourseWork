@@ -7,8 +7,8 @@
     <ProjectGuid>{8CD37022-F940-498B-B135-0EAC146562C1}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Imitation</RootNamespace>
-    <AssemblyName>Imitation</AssemblyName>
+    <RootNamespace>ImitationLib</RootNamespace>
+    <AssemblyName>ImitationLib</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

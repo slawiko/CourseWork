@@ -1,7 +1,7 @@
 ﻿using System;
-using Imitation.Utils;
+using ImitationLib.Utils;
 
-namespace Imitation.Elements
+namespace ImitationLib.Elements
 {
 	// TODO: rename Enter class
 	public class Enter : Generator

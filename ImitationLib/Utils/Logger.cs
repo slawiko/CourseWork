@@ -1,7 +1,7 @@
 ﻿using log4net;
 using log4net.Config;
 
-namespace Imitation.Utils
+namespace ImitationLib.Utils
 {
 	public static class Logger
 	{

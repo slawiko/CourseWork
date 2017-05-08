@@ -1,6 +1,6 @@
-﻿using Imitation.Utils;
+﻿using ImitationLib.Utils;
 
-namespace Imitation.Elements
+namespace ImitationLib.Elements
 {
 	/// <summary>
 	/// 1)      Модель должна содержать список всех элементов (генераторы, задаржки, очереди и т.д.) и управлять модельным временем. И это не singleton потому что теоретически в будущем можно иметь несколько моделей.

@@ -1,6 +1,6 @@
-﻿using Imitation.Utils;
+﻿using ImitationLib.Utils;
 
-namespace Imitation.Elements
+namespace ImitationLib.Elements
 {
 	public abstract class Collector : Element
 	{

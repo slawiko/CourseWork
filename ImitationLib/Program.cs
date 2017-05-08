@@ -1,6 +1,6 @@
-﻿using Imitation.Utils;
+﻿using ImitationLib.Utils;
 
-namespace Imitation
+namespace ImitationLib
 {
 	public class Program
 	{
