@@ -33,8 +33,7 @@ namespace Imitation.Elements
 				}
 				catch (Exception)
 				{
-					Console.WriteLine("Transact " + temp + " skipped by " + this);
-//					Logger.Log.Error($"\"{temp}\" is skipped by \"{this}\"");
+					Logger.Log.Error($"\"{temp}\" is skipped by \"{this}\"");
 				}
 			}
 			else

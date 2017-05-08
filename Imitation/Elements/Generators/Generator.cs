@@ -24,8 +24,7 @@ namespace Imitation.Elements
 			}
 			catch (System.Exception)
 			{
-				System.Console.WriteLine(temp + " skipped by " + this);
-//				Logger.Log.Error(temp + " skipped by " + this);
+				Logger.Log.Error($"{temp}skipped by {this}");
 			}
 		}
 	}

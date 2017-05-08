@@ -1,4 +1,4 @@
-﻿//using Imitation.Utils;
+﻿using Imitation.Utils;
 
 namespace Imitation
 {
@@ -6,7 +6,7 @@ namespace Imitation
 	{
 		public static void Main(string[] args)
 		{
-//			Logger.InitLogger();
+			Logger.InitLogger();
 			Model model = new Model();
 			model.Run();
 		}

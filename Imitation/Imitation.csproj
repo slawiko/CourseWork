@@ -58,7 +58,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Elements\Element.cs" />
-    <!--<Compile Include="Utils\Logger.cs" />-->
+    <Compile Include="Utils\Logger.cs" />
     <Compile Include="Utils\Transact.cs" />
   </ItemGroup>
   <ItemGroup>
