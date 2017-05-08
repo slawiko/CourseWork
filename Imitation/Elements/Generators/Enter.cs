@@ -1,14 +1,17 @@
-﻿namespace Imitation.Elements
+﻿using System;
+using Imitation.Utils;
+
+namespace Imitation.Elements
 {
 	// TODO: rename Enter class
 	public class Enter : Generator
 	{
-		private System.Random random;
+		private Random random;
 		private int capacity;
 
 		public Enter(int delay, int capacity)
 		{
-			this.random = new System.Random(delay);
+			this.random = new Random(delay);
 			this.capacity = capacity;
 			this.Delay = delay;
 			this.Next = delay;
@@ -21,19 +24,20 @@
 			{
 				this.Transact = new Transact(random);
 				this.capacity--;
-				this.Transact.LifeTime = "Processed in Generator at " + time;
+				this.Transact.LifeTime = "processed in Generator at " + time;
 				// TODO: think about it
 				var temp = this.Exit();
 				try
 				{
 					this.Out(temp);
 				}
-				catch (System.Exception)
+				catch (Exception)
 				{
-					System.Console.WriteLine("Transact " + temp + " skipped by " + this);
+					Console.WriteLine("Transact " + temp + " skipped by " + this);
+//					Logger.Log.Error($"\"{temp}\" is skipped by \"{this}\"");
 				}
 			}
-			else 
+			else
 			{
 				this.Next = -1;
 			}

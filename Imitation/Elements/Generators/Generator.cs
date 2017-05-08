@@ -1,4 +1,6 @@
-﻿namespace Imitation.Elements
+﻿using Imitation.Utils;
+
+namespace Imitation.Elements
 {
 	public abstract class Generator : Element
 	{
@@ -23,6 +25,7 @@
 			catch (System.Exception)
 			{
 				System.Console.WriteLine(temp + " skipped by " + this);
+//				Logger.Log.Error(temp + " skipped by " + this);
 			}
 		}
 	}

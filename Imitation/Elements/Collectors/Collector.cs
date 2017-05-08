@@ -1,4 +1,6 @@
-﻿namespace Imitation.Elements
+﻿using Imitation.Utils;
+
+namespace Imitation.Elements
 {
 	public abstract class Collector : Element
 	{

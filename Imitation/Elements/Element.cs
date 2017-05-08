@@ -1,4 +1,6 @@
-﻿namespace Imitation.Elements
+﻿using Imitation.Utils;
+
+namespace Imitation.Elements
 {
 	/// <summary>
 	/// 1)      Модель должна содержать список всех элементов (генераторы, задаржки, очереди и т.д.) и управлять модельным временем. И это не singleton потому что теоретически в будущем можно иметь несколько моделей.
@@ -12,13 +14,13 @@
 	/// 9)      Теперь модель может вызвать некий метод отображения – перерисовываем графики отражающее состояние и т.д.
 	/// 10)     Когда нет больше кандидатов на вызов Process – переходим к п.4. Только здесь уже вряд ли какой-то из элементов имеет право вернуть текущее модельное время.
 	/// </summary>
-	/// 
+	///
 	/// 1) Модель обходит все элементы и проверяет их свойство Next. Next содержит время спустя которое, состояние элемента в очередной раз изменится. Это время может быть нулем, если в элементе нет задержки.
 	/// 2) Модель выбирает один(или несколько, если одновременно готовы несколько) элементов с наименьшим заявленным временем смены состояния.
 	/// 3) Для них вызывается метод Process, в который передается текущее модельное время. Его задача переместить необходимые транзакты со входа(входов) элемента(или создать новые – если генератор, или создать копии и т.д.) на вход следующего в цепочке.
 	/// 4) Переходим к пункту 1
-	
 	public delegate Transact In();
+
 	public delegate void Out(Transact transact);
 
 	public abstract class Element
@@ -29,30 +31,18 @@
 		public virtual Transact Transact { get; protected set; }
 
 		protected int _next;
+
 		public virtual int Next
 		{
-			get
-			{
-				return this._next;
-			}
-			set
-			{
-				if (value != 0)
-				{
-					this._next = value;
-				}
-				else
-				{
-					this._next = this.Delay;
-				}
-			}
+			get { return this._next; }
+			set { this._next = value != 0 ? value : this.Delay; }
 		}
 
 		public virtual int Delay { get; protected set; }
 
 		public virtual void Process(int time)
 		{
-			this.Transact.LifeTime = "Processed in Element at " + time;
+			this.Transact.LifeTime = $"processed in Element at {time}";
 		}
 	}
 }

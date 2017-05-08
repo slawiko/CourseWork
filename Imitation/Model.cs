@@ -17,7 +17,6 @@ public class Model
 		this.WaitingList = new List<Element>();
 		this.Time = 0;
 		this.InitModel();
-		this.Run();
 	}
 
 	public void InitModel()

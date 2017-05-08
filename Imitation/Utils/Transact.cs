@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Imitation
+namespace Imitation.Utils
 {
 	public class Transact
 	{
@@ -26,7 +26,9 @@ namespace Imitation
 
 		public override string ToString()
 		{
-			return "Transact " + this._data + "\nLifeTime: " + string.Join("\n", this._lifeTime) + "\n";
+			return $"Transact {this._data}";
+
+			//lifeTime: {string.Join(";", this._lifeTime)}
 		}
 	}
 }
