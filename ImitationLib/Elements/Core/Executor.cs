@@ -2,7 +2,7 @@
 
 namespace ImitationLib.Elements.Core
 {
-	public abstract class Executor : Element, ITaker, IExitable
+	public abstract class Executor : Element, ITaker, IGiver
 	{
 		public virtual void Take(Transact transact, int time)
 		{
@@ -18,13 +18,13 @@ namespace ImitationLib.Elements.Core
 		}
 
 		/// <summary>
-		/// Makes <see cref="Transact"/> leave <see cref="Executor"/>
+		/// Gives <see cref="Transact"/> to next <see cref="Element"/>
 		/// </summary>
-		/// <returns>Released <see cref="Transact"/></returns>
-		public virtual Transact Exit(int time)
+		/// <returns>Given <see cref="Transact"/></returns>
+		public virtual Transact Give(int time)
 		{
 			var transact = this.Transact;
-			transact.LifeTime = $"{transact} left {this} at {time}";
+			transact.LifeTime = $"{transact} is given by {this} at {time}";
 			this.Transact = null;
 			this.ReadyIn = Constants.DefaultReadyIn;
 			return transact;
@@ -38,7 +38,7 @@ namespace ImitationLib.Elements.Core
 		{
 			base.Process(time);
 			// TODO: #6
-			var temp = this.Exit(time);
+			var temp = this.Give(time);
 			try
 			{
 				this.Out(temp, time);
