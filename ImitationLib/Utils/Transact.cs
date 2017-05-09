@@ -10,7 +10,11 @@ namespace ImitationLib.Utils
 		public string LifeTime
 		{
 			get { return this._lifeTime.Last(); }
-			set { this._lifeTime.Add(value); }
+			set
+			{
+				this._lifeTime.Add(value);
+				Logger.Log.Debug(value);
+			}
 		}
 
 		public Transact()
@@ -27,8 +31,6 @@ namespace ImitationLib.Utils
 		public override string ToString()
 		{
 			return $"Transact {this._data}";
-
-			//lifeTime: {string.Join(";", this._lifeTime)}
 		}
 	}
 }

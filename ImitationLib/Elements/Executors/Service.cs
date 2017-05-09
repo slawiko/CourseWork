@@ -5,7 +5,7 @@
 		public Service(int delay)
 		{
 			this.Delay = delay;
-			this.Next = -1;
+			this.ReadyIn = -1;
 		}
 	}
 }

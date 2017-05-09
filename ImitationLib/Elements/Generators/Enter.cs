@@ -6,15 +6,15 @@ namespace ImitationLib.Elements
 	// TODO: rename Enter class
 	public class Enter : Generator
 	{
-		private Random random;
+		private readonly Random _random;
 		private int capacity;
 
 		public Enter(int delay, int capacity)
 		{
-			this.random = new Random(delay);
+			this._random = new Random(delay);
 			this.capacity = capacity;
 			this.Delay = delay;
-			this.Next = delay;
+			this.ReadyIn = delay;
 		}
 
 		public override void Process(int time)
@@ -22,9 +22,9 @@ namespace ImitationLib.Elements
 			// TODO: think about it
 			if (capacity > 0)
 			{
-				this.Transact = new Transact(random);
+				this.Transact = new Transact(_random);
 				this.capacity--;
-				this.Transact.LifeTime = "processed in Generator at " + time;
+				this.Transact.LifeTime = $"{this.Transact} is processed in {this} at {time}";
 				// TODO: think about it
 				var temp = this.Exit();
 				try
@@ -38,7 +38,7 @@ namespace ImitationLib.Elements
 			}
 			else
 			{
-				this.Next = -1;
+				this.ReadyIn = -1;
 			}
 		}
 	}

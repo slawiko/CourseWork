@@ -2,20 +2,19 @@
 
 namespace ImitationLib.Elements
 {
-	public abstract class Collector : Element
+	public abstract class Collector : Element, IEnterable
 	{
 		public virtual void Enter(Transact transact)
 		{
 			this.Transact = transact;
-			this.Next = this.Delay;
+			this.ReadyIn = this.Delay;
 		}
 
 		public override void Process(int time)
 		{
-			this.Transact.LifeTime = "Processed in Collector at " + time;
-			System.Console.WriteLine(this.Transact);
+			this.Transact.LifeTime = $"{this.Transact} is processed in {this} at {time}";
 			this.Transact = null;
-			this.Next = -1;
+			this.ReadyIn = -1;
 		}
 	}
 }

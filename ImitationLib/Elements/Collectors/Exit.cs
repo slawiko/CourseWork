@@ -5,7 +5,7 @@
 		public Exit(int delay)
 		{
 			this.Delay = Delay;
-			this.Next = -1;
+			this.ReadyIn = -1;
 		}
 	}
 }

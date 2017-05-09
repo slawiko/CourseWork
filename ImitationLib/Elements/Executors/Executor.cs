@@ -2,29 +2,30 @@
 
 namespace ImitationLib.Elements
 {
-	public abstract class Executor : Element
+	public abstract class Executor : Element, IEnterable, IExitable
 	{
 		public virtual void Enter(Transact transact)
 		{
 			if (this.Transact != null)
 			{
-				throw new System.Exception("Element is busy");
+				Logger.Log.Warn($"{this} is busy");
+				throw new System.Exception($"{this} is busy");
 			}
 			this.Transact = transact;
-			this.Next = this.Delay;
+			this.ReadyIn = this.Delay;
 		}
 
 		public virtual Transact Exit()
 		{
 			var transact = this.Transact;
 			this.Transact = null;
-			this.Next = -1;
+			this.ReadyIn = -1;
 			return transact;
 		}
 
 		public override void Process(int time)
 		{
-			this.Transact.LifeTime = "Processed in Executor at " + time;
+			this.Transact.LifeTime = $"{this.Transact} is processed in {this} at {time}";
 			// TODO: think about it
 			var temp = this.Exit();
 			try
@@ -33,7 +34,7 @@ namespace ImitationLib.Elements
 			}
 			catch (System.Exception)
 			{
-				System.Console.WriteLine(temp + " skipped by " + this);
+				Logger.Log.Error($"{temp} skipped by {this}");
 			}
 		}
 	}
