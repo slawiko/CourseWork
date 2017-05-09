@@ -1,44 +1,45 @@
 ﻿using System;
+using ImitationLib.Elements.Core;
 using ImitationLib.Utils;
 
 namespace ImitationLib.Elements
 {
 	// TODO: rename Enter class
-	public class Enter : Generator
+	public sealed class Enter : Generator
 	{
-		private Random random;
-		private int capacity;
+		private readonly Random _random;
+		private int _capacity;
 
 		public Enter(int delay, int capacity)
 		{
-			this.random = new Random(delay);
-			this.capacity = capacity;
+			this._random = new Random(delay);
+			this._capacity = capacity;
 			this.Delay = delay;
-			this.Next = delay;
+			this.ReadyIn = delay;
 		}
 
 		public override void Process(int time)
 		{
 			// TODO: think about it
-			if (capacity > 0)
+			if (_capacity > 0)
 			{
-				this.Transact = new Transact(random);
-				this.capacity--;
-				this.Transact.LifeTime = "processed in Generator at " + time;
+				this.Transact = new Transact(_random);
+				this._capacity--;
+				this.Transact.LifeTime = $"{this.Transact} is processed in {this} at {time}";
 				// TODO: think about it
-				var temp = this.Exit();
+				var temp = this.Give(time);
 				try
 				{
-					this.Out(temp);
+					this.Out(temp, time);
 				}
-				catch (Exception)
+				catch (Exception e)
 				{
-					Logger.Log.Error($"\"{temp}\" is skipped by \"{this}\"");
+					Logger.Log.Error(e.Message);
 				}
 			}
 			else
 			{
-				this.Next = -1;
+				this.ReadyIn = -1;
 			}
 		}
 	}

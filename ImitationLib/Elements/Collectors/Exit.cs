@@ -1,11 +1,16 @@
-﻿namespace ImitationLib.Elements
+﻿using System.Collections.Generic;
+using ImitationLib.Elements.Core;
+using ImitationLib.Utils;
+
+namespace ImitationLib.Elements
 {
-	public class Exit : Collector
+	public sealed class Exit : Collector
 	{
 		public Exit(int delay)
 		{
-			this.Delay = Delay;
-			this.Next = -1;
+			this.CollectedTransacts = new List<Transact>();
+			this.Delay = delay;
+			this.ReadyIn = Constants.DefaultReadyIn;
 		}
 	}
 }

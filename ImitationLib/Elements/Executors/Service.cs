@@ -1,11 +1,13 @@
-﻿namespace ImitationLib.Elements
+﻿using ImitationLib.Elements.Core;
+
+namespace ImitationLib.Elements
 {
-	public class Service : Executor
+	public sealed class Service : Executor
 	{
 		public Service(int delay)
 		{
 			this.Delay = delay;
-			this.Next = -1;
+			this.ReadyIn = -1;
 		}
 	}
 }
