@@ -5,15 +5,15 @@ using ImitationLib.Utils;
 namespace ImitationLib.Elements
 {
 	// TODO: rename Enter class
-	public class Enter : Generator
+	public sealed class Enter : Generator
 	{
 		private readonly Random _random;
-		private int capacity;
+		private int _capacity;
 
 		public Enter(int delay, int capacity)
 		{
 			this._random = new Random(delay);
-			this.capacity = capacity;
+			this._capacity = capacity;
 			this.Delay = delay;
 			this.ReadyIn = delay;
 		}
@@ -21,10 +21,10 @@ namespace ImitationLib.Elements
 		public override void Process(int time)
 		{
 			// TODO: think about it
-			if (capacity > 0)
+			if (_capacity > 0)
 			{
 				this.Transact = new Transact(_random);
-				this.capacity--;
+				this._capacity--;
 				this.Transact.LifeTime = $"{this.Transact} is processed in {this} at {time}";
 				// TODO: think about it
 				var temp = this.Give(time);

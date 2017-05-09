@@ -2,7 +2,7 @@
 
 namespace ImitationLib.Elements
 {
-	public class Service : Executor
+	public sealed class Service : Executor
 	{
 		public Service(int delay)
 		{
