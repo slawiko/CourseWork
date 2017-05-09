@@ -7,6 +7,6 @@ namespace ImitationLib.Elements.Core
 	/// </summary>
 	public interface IExitable
 	{
-		Transact Exit();
+		Transact Exit(int time);
 	}
 }

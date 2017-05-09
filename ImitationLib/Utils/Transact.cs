@@ -22,6 +22,7 @@ namespace ImitationLib.Utils
 			this._lifeTime = new List<string>();
 			this._data = -1;
 		}
+
 		public Transact(System.Random random)
 		{
 			this._lifeTime = new List<string>();

@@ -6,12 +6,12 @@ namespace ImitationLib.Elements.Core
 	/// Using this delegate <see cref="Element"/> can pass his <see cref="ImitationLib.Utils.Transact"/> to next <see cref="Element"/>
 	/// </summary>
 	/// <param name="transact"></param>
-	public delegate void Out(Transact transact);
+	public delegate void Out(Transact transact, int time);
 
 	/// <summary>
 	/// Not implemented
 	/// </summary>
-	public delegate Transact In();
+	public delegate Transact In(int time);
 
 	public abstract class Element
 	{

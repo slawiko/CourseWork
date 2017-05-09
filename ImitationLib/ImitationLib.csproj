@@ -46,15 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Elements\Accumulators\Queue.cs" />
     <Compile Include="Elements\Collectors\Exit.cs" />
-    <Compile Include="Elements\Core\Accumulator.cs"/>
-    <Compile Include="Elements\Core\Collector.cs"/>
-    <Compile Include="Elements\Core\Element.cs"/>
-    <Compile Include="Elements\Core\Executor.cs"/>
-    <Compile Include="Elements\Core\Generator.cs"/>
-    <Compile Include="Elements\Core\IEnterable.cs"/>
-    <Compile Include="Elements\Core\IExitable.cs"/>
+      <Compile Include="Elements\Core\Collector.cs"/>
+      <Compile Include="Elements\Core\Element.cs"/>
+      <Compile Include="Elements\Core\Executor.cs"/>
+      <Compile Include="Elements\Core\Generator.cs"/>
+      <Compile Include="Elements\Core\IEnterable.cs"/>
+      <Compile Include="Elements\Core\IExitable.cs"/>
     <Compile Include="Elements\Executors\Service.cs" />
     <Compile Include="Elements\Generators\Enter.cs" />
     <Compile Include="Model.cs" />

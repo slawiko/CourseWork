@@ -20,7 +20,7 @@ namespace ImitationLib.Elements.Core
 			var temp = this.Exit();
 			try
 			{
-				this.Out(temp);
+				this.Out(temp, time);
 			}
 			catch (System.Exception e)
 			{

@@ -7,6 +7,6 @@ namespace ImitationLib.Elements.Core
 	/// </summary>
 	public interface IEnterable
 	{
-		void Enter(Transact transact);
+		void Enter(Transact transact, int time);
 	}
 }
