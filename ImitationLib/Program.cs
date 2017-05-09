@@ -1,4 +1,5 @@
 ﻿using ImitationLib.Elements;
+using ImitationLib.Elements.Core;
 using ImitationLib.Utils;
 
 namespace ImitationLib
@@ -9,9 +10,9 @@ namespace ImitationLib
 		{
 			Logger.InitLogger();
 
-			Generator enter = new Enter(5, 3);
-			Executor service = new Service(2);
-			Executor service2 = new Service(12);
+			Generator enter = new Enter(5, 4);
+			Executor service = new Service(12);
+			Executor service2 = new Service(2);
 			Executor service3 = new Service(8);
 			Collector exit = new Exit(0);
 

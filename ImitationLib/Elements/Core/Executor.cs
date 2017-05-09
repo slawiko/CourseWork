@@ -1,6 +1,6 @@
 ﻿using ImitationLib.Utils;
 
-namespace ImitationLib.Elements
+namespace ImitationLib.Elements.Core
 {
 	public abstract class Executor : Element, IEnterable, IExitable
 	{
@@ -9,7 +9,7 @@ namespace ImitationLib.Elements
 			if (this.Transact != null)
 			{
 				Logger.Log.Warn($"{this} is busy");
-				throw new System.Exception($"{this} is busy");
+				throw new System.Exception($"{transact} is skipped by {this}, because of {this.Transact}");
 			}
 			this.Transact = transact;
 			this.ReadyIn = this.Delay;
@@ -19,7 +19,7 @@ namespace ImitationLib.Elements
 		{
 			var transact = this.Transact;
 			this.Transact = null;
-			this.ReadyIn = -1;
+			this.ReadyIn = Constants.DefaultReadyIn;
 			return transact;
 		}
 
@@ -32,9 +32,9 @@ namespace ImitationLib.Elements
 			{
 				this.Out(temp);
 			}
-			catch (System.Exception)
+			catch (System.Exception e)
 			{
-				Logger.Log.Error($"{temp} skipped by {this}");
+				Logger.Log.Error(e.Message);
 			}
 		}
 	}

@@ -1,4 +1,6 @@
-﻿namespace ImitationLib.Elements
+﻿using ImitationLib.Elements.Core;
+
+namespace ImitationLib.Elements
 {
 	public class Exit : Collector
 	{

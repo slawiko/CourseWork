@@ -1,6 +1,6 @@
 ﻿using ImitationLib.Utils;
 
-namespace ImitationLib.Elements
+namespace ImitationLib.Elements.Core
 {
 	public abstract class Collector : Element, IEnterable
 	{

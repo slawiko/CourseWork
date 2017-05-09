@@ -1,12 +1,17 @@
 ﻿using ImitationLib.Utils;
 
-namespace ImitationLib.Elements
+namespace ImitationLib.Elements.Core
 {
 	/// <summary>
 	/// Using this delegate <see cref="Element"/> can pass his <see cref="ImitationLib.Utils.Transact"/> to next <see cref="Element"/>
 	/// </summary>
 	/// <param name="transact"></param>
 	public delegate void Out(Transact transact);
+
+	/// <summary>
+	/// Not implemented
+	/// </summary>
+	public delegate Transact In();
 
 	public abstract class Element
 	{

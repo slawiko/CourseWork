@@ -1,4 +1,5 @@
 ﻿using System;
+using ImitationLib.Elements.Core;
 using ImitationLib.Utils;
 
 namespace ImitationLib.Elements
@@ -31,9 +32,9 @@ namespace ImitationLib.Elements
 				{
 					this.Out(temp);
 				}
-				catch (Exception)
+				catch (Exception e)
 				{
-					Logger.Log.Error($"\"{temp}\" is skipped by \"{this}\"");
+					Logger.Log.Error(e.Message);
 				}
 			}
 			else

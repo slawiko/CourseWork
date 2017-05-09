@@ -1,6 +1,6 @@
 ﻿using ImitationLib.Utils;
 
-namespace ImitationLib.Elements
+namespace ImitationLib.Elements.Core
 {
 	public abstract class Generator : Element, IExitable
 	{
@@ -22,9 +22,9 @@ namespace ImitationLib.Elements
 			{
 				this.Out(temp);
 			}
-			catch (System.Exception)
+			catch (System.Exception e)
 			{
-				Logger.Log.Error($"{temp}skipped by {this}");
+				Logger.Log.Error(e.Message);
 			}
 		}
 	}
