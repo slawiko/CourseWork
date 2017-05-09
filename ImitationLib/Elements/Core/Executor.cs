@@ -2,9 +2,9 @@
 
 namespace ImitationLib.Elements.Core
 {
-	public abstract class Executor : Element, IEnterable, IExitable
+	public abstract class Executor : Element, ITaker, IExitable
 	{
-		public virtual void Enter(Transact transact, int time)
+		public virtual void Take(Transact transact, int time)
 		{
 			// TODO: #6
 			if (this.Transact != null)
@@ -13,6 +13,7 @@ namespace ImitationLib.Elements.Core
 				throw new System.Exception($"{transact} is skipped by {this} at {time}, because of {this.Transact}");
 			}
 			this.Transact = transact;
+			this.Transact.LifeTime = $"{this.Transact} is taken in {this} at {time}";
 			this.ReadyIn = this.Delay;
 		}
 

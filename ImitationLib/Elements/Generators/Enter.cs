@@ -27,7 +27,7 @@ namespace ImitationLib.Elements
 				this.capacity--;
 				this.Transact.LifeTime = $"{this.Transact} is processed in {this} at {time}";
 				// TODO: think about it
-				var temp = this.Exit();
+				var temp = this.Exit(time);
 				try
 				{
 					this.Out(temp, time);

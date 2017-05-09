@@ -3,7 +3,7 @@ using ImitationLib.Utils;
 
 namespace ImitationLib.Elements.Core
 {
-	public abstract class Collector : Element, IEnterable
+	public abstract class Collector : Element, ITaker
 	{
 		/// <summary>
 		/// List of <see cref="Transact"/> that left <see cref="Model"/>
@@ -11,14 +11,14 @@ namespace ImitationLib.Elements.Core
 		public virtual List<Transact> CollectedTransacts { get; protected set; }
 
 		/// <summary>
-		/// Makes <see cref="Transact"/> entered in element
+		/// Takes <see cref="Transact"/> in element
 		/// </summary>
 		/// <param name="transact"></param>
 		/// <param name="time"></param>
-		public virtual void Enter(Transact transact, int time)
+		public virtual void Take(Transact transact, int time)
 		{
 			this.Transact = transact;
-			this.Transact.LifeTime = $"{this.Transact} entered in {this} at {time}";
+			this.Transact.LifeTime = $"{this.Transact} is taken in {this} at {time}";
 			this.ReadyIn = this.Delay;
 		}
 

@@ -72,14 +72,14 @@ public class Model
 	// TODO: #15
 	public void LinkElements(Generator enter, Collector exit, params Executor[] executors)
 	{
-		enter.Out += executors.First().Enter;
+		enter.Out += executors.First().Take;
 
 		for (int i = 0; i < executors.Length - 1; i++)
 		{
-			executors[i].Out += executors[i + 1].Enter;
+			executors[i].Out += executors[i + 1].Take;
 		}
 
-		executors.Last().Out += exit.Enter;
+		executors.Last().Out += exit.Take;
 
 		this._elementsList.Add(enter);
 		this._elementsList.AddRange(executors);
