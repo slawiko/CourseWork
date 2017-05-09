@@ -1,16 +1,23 @@
-﻿using ImitationLib.Utils;
+﻿using System;
+using ImitationLib.Utils;
 
 namespace ImitationLib.Elements.Core
 {
 	public abstract class Executor : Element, ITaker, IGiver
 	{
+		/// <summary>
+		/// <seealso cref="ITaker.Take"/>
+		/// </summary>
+		/// <param name="transact"></param>
+		/// <param name="time"></param>
+		/// <exception cref="Exception"></exception>
 		public virtual void Take(Transact transact, int time)
 		{
 			// TODO: #6
 			if (this.Transact != null)
 			{
 				Logger.Log.Warn($"{this} is busy at {time}");
-				throw new System.Exception($"{transact} is skipped by {this} at {time}, because of {this.Transact}");
+				throw new Exception($"{transact} is skipped by {this} at {time}, because of {this.Transact}");
 			}
 			this.Transact = transact;
 			this.Transact.LifeTime = $"{this.Transact} is taken in {this} at {time}";
@@ -18,7 +25,7 @@ namespace ImitationLib.Elements.Core
 		}
 
 		/// <summary>
-		/// Gives <see cref="Transact"/> to next <see cref="Element"/>
+		/// <seealso cref="IGiver.Give"/>
 		/// </summary>
 		/// <returns>Given <see cref="Transact"/></returns>
 		public virtual Transact Give(int time)
@@ -43,7 +50,7 @@ namespace ImitationLib.Elements.Core
 			{
 				this.Out(temp, time);
 			}
-			catch (System.Exception e)
+			catch (Exception e)
 			{
 				Logger.Log.Error(e.Message);
 			}

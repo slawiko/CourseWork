@@ -7,6 +7,9 @@ namespace ImitationLib.Elements.Core
 	/// </summary>
 	public interface ITaker
 	{
+		/// <summary>
+		/// Takes <see cref="Transact"/> from previous <see cref="Element"/>
+		/// </summary>
 		void Take(Transact transact, int time);
 	}
 }

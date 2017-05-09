@@ -7,6 +7,9 @@ namespace ImitationLib.Elements.Core
 	/// </summary>
 	public interface IGiver
 	{
+		/// <summary>
+		/// Gives <see cref="Transact"/> to next <see cref="Element"/>
+		/// </summary>
 		Transact Give(int time);
 	}
 }

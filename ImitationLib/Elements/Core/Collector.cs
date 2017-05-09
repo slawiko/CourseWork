@@ -11,7 +11,7 @@ namespace ImitationLib.Elements.Core
 		public virtual List<Transact> CollectedTransacts { get; protected set; }
 
 		/// <summary>
-		/// Takes <see cref="Transact"/> in element
+		/// <seealso cref="ITaker.Take"/>
 		/// </summary>
 		/// <param name="transact"></param>
 		/// <param name="time"></param>
