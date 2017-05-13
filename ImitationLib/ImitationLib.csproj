@@ -53,6 +53,7 @@
     <Compile Include="Elements\Core\Generator.cs" />
     <Compile Include="Elements\Core\ITaker.cs" />
     <Compile Include="Elements\Core\IGiver.cs" />
+    <Compile Include="Elements\Core\QueueableElement.cs" />
     <Compile Include="Elements\Executors\Service.cs" />
     <Compile Include="Elements\Generators\Enter.cs" />
     <Compile Include="Model.cs" />

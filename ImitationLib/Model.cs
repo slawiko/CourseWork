@@ -101,7 +101,6 @@ public class Model
 		this._actionList.AddRange(this._elementsList.Where(element => element.ReadyIn == min));
 		this._waitingList.AddRange(this._elementsList.Where(element => element.ReadyIn > min));
 
-
 		return min;
 	}
 

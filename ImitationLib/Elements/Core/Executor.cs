@@ -3,7 +3,7 @@ using ImitationLib.Utils;
 
 namespace ImitationLib.Elements.Core
 {
-	public abstract class Executor : Element, ITaker, IGiver
+	public abstract class Executor : QueueableElement, ITaker, IGiver
 	{
 		/// <summary>
 		/// <seealso cref="ITaker.Take"/>
@@ -13,15 +13,14 @@ namespace ImitationLib.Elements.Core
 		/// <exception cref="Exception"></exception>
 		public virtual void Take(Transact transact, int time)
 		{
-			// TODO: #6
-			if (this.Transact != null)
+			if (this._capacity != Constants.InfiniteQueue && this.Transacts.Count >= this._capacity)
 			{
-				Logger.Log.Warn($"{this} is busy at {time}");
-				throw new Exception($"{transact} is skipped by {this} at {time}, because of {this.Transact}");
+				Logger.Log.Warn($"{this} is overcrowded at {time}");
+				throw new Exception($"{transact} is skipped by {this} at {time}, because of overcrowding");
 			}
-			this.Transact = transact;
-			this.Transact.LifeTime = $"{this.Transact} is taken in {this} at {time}";
-			this.ReadyIn = this.Delay;
+			transact.LifeTime = $"{transact} is taken in {this} at {time}";
+			this.Transacts.Enqueue(transact);
+			this.ReadyIn = this.ReadyIn > 0 ? this.ReadyIn : this.Delay;
 		}
 
 		/// <summary>
@@ -30,10 +29,9 @@ namespace ImitationLib.Elements.Core
 		/// <returns>Given <see cref="Transact"/></returns>
 		public virtual Transact Give(int time)
 		{
-			var transact = this.Transact;
+			var transact = this.Transacts.Dequeue();
 			transact.LifeTime = $"{transact} is given by {this} at {time}";
-			this.Transact = null;
-			this.ReadyIn = Constants.DefaultReadyIn;
+			this.ReadyIn = this.Transacts.Count > 0 ? this.Delay : Constants.DefaultReadyIn;
 			return transact;
 		}
 
@@ -44,7 +42,7 @@ namespace ImitationLib.Elements.Core
 		public override void Process(int time)
 		{
 			base.Process(time);
-			// TODO: #6
+
 			var temp = this.Give(time);
 			try
 			{

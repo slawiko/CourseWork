@@ -39,7 +39,7 @@ namespace ImitationLib.Elements
 			}
 			else
 			{
-				this.ReadyIn = -1;
+				this.ReadyIn = Constants.DefaultReadyIn;
 			}
 		}
 	}

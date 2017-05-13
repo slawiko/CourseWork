@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ImitationLib.Utils;
 
 namespace ImitationLib.Elements.Core
 {
-	public abstract class Collector : Element, ITaker
+	public abstract class Collector : QueueableElement, ITaker
 	{
 		/// <summary>
 		/// List of <see cref="Transact"/> that left <see cref="Model"/>
@@ -17,9 +18,14 @@ namespace ImitationLib.Elements.Core
 		/// <param name="time"></param>
 		public virtual void Take(Transact transact, int time)
 		{
-			this.Transact = transact;
-			this.Transact.LifeTime = $"{this.Transact} is taken in {this} at {time}";
-			this.ReadyIn = this.Delay;
+			if (this._capacity != Constants.InfiniteQueue && this.Transacts.Count >= this._capacity)
+			{
+				Logger.Log.Warn($"{this} is overcrowded at {time}");
+				throw new Exception($"{transact} is skipped by {this} at {time}, because of overcrowding");
+			}
+			transact.LifeTime = $"{transact} is taken in {this} at {time}";
+			this.Transacts.Enqueue(transact);
+			this.ReadyIn = this.ReadyIn > 0 ? this.ReadyIn : this.Delay;
 		}
 
 		/// <summary>
@@ -29,8 +35,8 @@ namespace ImitationLib.Elements.Core
 		public override void Process(int time)
 		{
 			base.Process(time);
-			this.CollectedTransacts.Add(this.Transact);
-			this.ReadyIn = Constants.DefaultReadyIn;
+			this.CollectedTransacts.Add(this.Transacts.Dequeue());
+			this.ReadyIn = this.Transacts.Count > 0 ? this.Delay : Constants.DefaultReadyIn;
 		}
 	}
 }
