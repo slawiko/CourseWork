@@ -2,7 +2,7 @@
 {
 	public static class Constants
 	{
-		public const int DefaultReadyIn = -1;
-		public const int InfiniteQueue = -1;
+		public const int ReadyToTake = -1;
+		public const int InfiniteQueueCapacity = -1;
 	}
 }

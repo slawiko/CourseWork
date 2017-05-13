@@ -6,12 +6,12 @@ namespace ImitationLib.Elements
 {
 	public sealed class Service : Executor
 	{
-		public Service(int delay, int capacity = Constants.InfiniteQueue)
+		public Service(int delay, int capacity = Constants.InfiniteQueueCapacity)
 		{
 			this.Delay = delay;
 			this._capacity = capacity;
 			this.Transacts = new Queue<Transact>();
-			this.ReadyIn = Constants.DefaultReadyIn;
+			this.ReadyIn = Constants.ReadyToTake;
 		}
 	}
 }

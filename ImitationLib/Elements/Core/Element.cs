@@ -21,7 +21,7 @@ namespace ImitationLib.Elements.Core
 		/// Represents number of <see cref="Model.Time"/> during which current <see cref="Element"/> will process <see cref="Transact"/>
 		/// </summary>
 		/// <remarks>
-		/// <para>Value can be <see cref="Constants.DefaultReadyIn"/> if element didn't start processing</para>
+		/// <para>Value can be <see cref="Constants.ReadyToTake"/> if element didn't start processing</para>
 		/// <para>Value can be 0 if <see cref="Element"/> is ready for taking new <see cref="Transact"/></para>
 		/// <para>Value can be more than 0 and less than <see cref="Delay"/> if <see cref="Element"/> is in processing now</para>
 		/// <para>Otherwise value is equal to <see cref="Delay"/></para>

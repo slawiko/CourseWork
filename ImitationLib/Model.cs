@@ -141,14 +141,14 @@ public class Model
 	/// <summary>
 	/// Calculates minimal <see cref="Element.ReadyIn"/> in <see cref="_elementsList"/>>
 	/// </summary>
-	/// <returns>Minimal <see cref="Element.ReadyIn"/> or <see cref="Constants.DefaultReadyIn"/> if no positive values</returns>
+	/// <returns>Minimal <see cref="Element.ReadyIn"/> or <see cref="Constants.ReadyToTake"/> if no positive values</returns>
 	private int MinReadyIn()
 	{
 		return this._elementsList
 			.Select(element => element.ReadyIn)
 			.OrderBy(readyIn => readyIn)
 			.Where(readyIn => readyIn >= 0)
-			.DefaultIfEmpty(Constants.DefaultReadyIn)
+			.DefaultIfEmpty(Constants.ReadyToTake)
 			.First();
 	}
 }
