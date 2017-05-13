@@ -13,14 +13,14 @@ namespace ImitationLib.Elements.Core
 		/// <exception cref="Exception"></exception>
 		public virtual void Take(Transact transact, int time)
 		{
-			if (this._capacity != Constants.InfiniteQueue && this.Transacts.Count >= this._capacity)
+			if (this._capacity != Constants.InfiniteQueueCapacity && this.Transacts.Count >= this._capacity)
 			{
 				Logger.Log.Warn($"{this} is overcrowded at {time}");
 				throw new Exception($"{transact} is skipped by {this} at {time}, because of overcrowding");
 			}
 			transact.LifeTime = $"{transact} is taken in {this} at {time}";
 			this.Transacts.Enqueue(transact);
-			this.ReadyIn = this.ReadyIn > 0 ? this.ReadyIn : this.Delay;
+			this.UpdateReadiness();
 		}
 
 		/// <summary>
@@ -31,7 +31,7 @@ namespace ImitationLib.Elements.Core
 		{
 			var transact = this.Transacts.Dequeue();
 			transact.LifeTime = $"{transact} is given by {this} at {time}";
-			this.ReadyIn = this.Transacts.Count > 0 ? this.Delay : Constants.DefaultReadyIn;
+			this.UpdateReadiness();
 			return transact;
 		}
 

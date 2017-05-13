@@ -13,7 +13,7 @@ namespace ImitationLib.Elements.Core
 		/// <summary>
 		/// Number of <see cref="Transact"/> that can be IN <see cref="Element"/>
 		/// </summary>
-		protected int _capacity = Constants.InfiniteQueue;
+		protected int _capacity = Constants.InfiniteQueueCapacity;
 
 		/// <summary>
 		/// Processes <see cref="Transact"/>
@@ -23,6 +23,18 @@ namespace ImitationLib.Elements.Core
 		{
 			var temp = this.Transacts.Peek();
 			temp.LifeTime = $"{temp} is processed in {this} at {time}";
+		}
+
+		protected virtual void UpdateReadiness()
+		{
+			if (this.Transacts.Count > 0)
+			{
+				this.ReadyIn = this.ReadyIn == Constants.ReadyToTake ? this.Delay : this.ReadyIn;
+			}
+			else
+			{
+				this.ReadyIn = Constants.ReadyToTake;
+			}
 		}
 	}
 }
