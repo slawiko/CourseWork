@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using ImitationLib.Utils;
 
 namespace ImitationLib.Elements.Core
@@ -9,7 +8,7 @@ namespace ImitationLib.Elements.Core
 		/// <summary>
 		/// List of <see cref="Transact"/> that will enter in <see cref="Model"/>
 		/// </summary>
-		public List<Transact> GeneratedTransacts { get; protected set; }
+		protected Transact Transact { get; set; }
 
 		/// <summary>
 		/// <seealso cref="IGiver.Give"/>
@@ -30,7 +29,6 @@ namespace ImitationLib.Elements.Core
 		/// </summary>
 		/// <param name="time"></param>
 		/// <exception cref="Exception"></exception>
-
 		public override void Process(int time)
 		{
 			this.Transact = new Transact();

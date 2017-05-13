@@ -18,11 +18,6 @@ namespace ImitationLib.Elements.Core
 		public virtual Out Out { get; set; }
 
 		/// <summary>
-		/// Contains <see cref="ImitationLib.Utils.Transact"/> that is on processing in current <see cref="Element"/>
-		/// </summary>
-		public virtual Transact Transact { get; protected set; }
-
-		/// <summary>
 		/// Represents number of <see cref="Model.Time"/> during which current <see cref="Element"/> will process <see cref="Transact"/>
 		/// </summary>
 		/// <remarks>
@@ -48,9 +43,6 @@ namespace ImitationLib.Elements.Core
 		/// Processes <see cref="Transact"/>
 		/// </summary>
 		/// <param name="time"><see cref="Model.Time"/> when <see cref="Transact"/> entered <see cref="Element"/></param>
-		public virtual void Process(int time)
-		{
-			this.Transact.LifeTime = $"{this.Transact} is processed in {this} at {time}";
-		}
+		public abstract void Process(int time);
 	}
 }
