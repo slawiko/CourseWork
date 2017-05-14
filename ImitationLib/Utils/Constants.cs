@@ -3,6 +3,9 @@
 	public static class Constants
 	{
 		public const int ReadyToTake = -1;
+		public const int ForeverReady = -2;
+
 		public const int InfiniteQueueCapacity = -1;
+		public const int ZeroQueueCapacity = 0;
 	}
 }
