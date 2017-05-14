@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ImitationLib.Elements.Core;
 using ImitationLib.Utils;
 
@@ -8,38 +9,31 @@ namespace ImitationLib.Elements
 	public sealed class Enter : Generator
 	{
 		private readonly Random _random;
-		private int _capacity;
 
-		public Enter(int delay, int capacity)
+		public Enter(int delay, int count)
 		{
 			this._random = new Random(delay);
-			this._capacity = capacity;
+			this._count = count;
 			this.Delay = delay;
 			this.ReadyIn = delay;
+			this.Transacts = new Queue<Transact>();
 		}
 
 		public override void Process(int time)
 		{
 			// TODO: think about it
-			if (_capacity > 0)
+			this.Generate(this._random);
+			var transact = this.Transacts.Peek();
+			transact.LifeTime = $"{transact} is processed in {this} at {time}";
+			// TODO: think about it
+			var temp = this.Give(time);
+			try
 			{
-				this.Transact = new Transact(_random);
-				this._capacity--;
-				this.Transact.LifeTime = $"{this.Transact} is processed in {this} at {time}";
-				// TODO: think about it
-				var temp = this.Give(time);
-				try
-				{
-					this.Out(temp, time);
-				}
-				catch (Exception e)
-				{
-					Logger.Log.Error(e.Message);
-				}
+				this.Out(temp, time);
 			}
-			else
+			catch (Exception e)
 			{
-				this.ReadyIn = Constants.ReadyToTake;
+				Logger.Log.Error(e.Message);
 			}
 		}
 	}

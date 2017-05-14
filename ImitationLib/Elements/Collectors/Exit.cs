@@ -8,7 +8,6 @@ namespace ImitationLib.Elements
 	{
 		public Exit(int delay, int capacity = Constants.InfiniteQueueCapacity)
 		{
-			this.CollectedTransacts = new List<Transact>();
 			this.Delay = delay;
 			this._capacity = capacity;
 			this.Transacts = new Queue<Transact>();

@@ -3,7 +3,7 @@ using ImitationLib.Utils;
 
 namespace ImitationLib.Elements.Core
 {
-	public abstract class Executor : QueueableElement, ITaker, IGiver
+	public abstract class Executor : Element, ITaker, IGiver
 	{
 		/// <summary>
 		/// <seealso cref="ITaker.Take"/>
@@ -20,18 +20,19 @@ namespace ImitationLib.Elements.Core
 			}
 			transact.LifeTime = $"{transact} is taken in {this} at {time}";
 			this.Transacts.Enqueue(transact);
-			this.UpdateReadiness();
+			this.ReadyIn = this.ReadyIn == Constants.ReadyToTake ? this.Delay : this.ReadyIn;
 		}
 
 		/// <summary>
 		/// <seealso cref="IGiver.Give"/>
 		/// </summary>
+		/// <param name="time"></param>
 		/// <returns>Given <see cref="Transact"/></returns>
 		public virtual Transact Give(int time)
 		{
 			var transact = this.Transacts.Dequeue();
+			this.ReadyIn = this.Transacts.Count > 0 ? this.Delay : Constants.ReadyToTake;
 			transact.LifeTime = $"{transact} is given by {this} at {time}";
-			this.UpdateReadiness();
 			return transact;
 		}
 
@@ -39,6 +40,7 @@ namespace ImitationLib.Elements.Core
 		/// <seealso cref="Element.Process"/>
 		/// </summary>
 		/// <param name="time"></param>
+		/// <exception cref="Exception"></exception>
 		public override void Process(int time)
 		{
 			base.Process(time);

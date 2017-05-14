@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using ImitationLib.Utils;
 
 namespace ImitationLib.Elements.Core
 {
-	public abstract class Collector : QueueableElement, ITaker
+	public abstract class Collector : Element, ITaker
 	{
-		/// <summary>
-		/// List of <see cref="Transact"/> that left <see cref="Model"/>
-		/// </summary>
-		public virtual List<Transact> CollectedTransacts { get; protected set; }
-
 		/// <summary>
 		/// <seealso cref="ITaker.Take"/>
 		/// </summary>
@@ -25,8 +19,13 @@ namespace ImitationLib.Elements.Core
 			}
 			transact.LifeTime = $"{transact} is taken in {this} at {time}";
 			this.Transacts.Enqueue(transact);
-			this.UpdateReadiness();
+			this.ReadyIn = this.ReadyIn == Constants.ReadyToTake ? this.Delay : this.ReadyIn;
 		}
+
+		/// <summary>
+		/// Collects <see cref="Transact"/>
+		/// </summary>
+		protected virtual void Collect() {}
 
 		/// <summary>
 		/// <seealso cref="Element.Process"/>
@@ -35,8 +34,8 @@ namespace ImitationLib.Elements.Core
 		public override void Process(int time)
 		{
 			base.Process(time);
-			this.CollectedTransacts.Add(this.Transacts.Dequeue());
-			this.UpdateReadiness();
+			this.Transacts.Dequeue();
+			this.ReadyIn = this.Transacts.Count > 0 ? this.Delay : Constants.ReadyToTake;
 		}
 	}
 }

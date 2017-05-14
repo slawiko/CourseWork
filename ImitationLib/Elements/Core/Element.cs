@@ -1,4 +1,5 @@
-﻿using ImitationLib.Utils;
+﻿using System.Collections.Generic;
+using ImitationLib.Utils;
 
 namespace ImitationLib.Elements.Core
 {
@@ -18,6 +19,16 @@ namespace ImitationLib.Elements.Core
 		public virtual Out Out { get; set; }
 
 		/// <summary>
+		/// Contains <see cref="ImitationLib.Utils.Transact"/> which is on processing in current <see cref="Element"/>
+		/// </summary>
+		protected virtual Queue<Transact> Transacts { get; set; }
+
+		/// <summary>
+		/// Number of <see cref="Transact"/> that can be IN <see cref="Element"/>
+		/// </summary>
+		protected int _capacity = Constants.InfiniteQueueCapacity;
+
+		/// <summary>
 		/// Represents number of <see cref="Model.Time"/> during which current <see cref="Element"/> will process <see cref="Transact"/>
 		/// </summary>
 		/// <remarks>
@@ -26,13 +37,7 @@ namespace ImitationLib.Elements.Core
 		/// <para>Value can be more than 0 and less than <see cref="Delay"/> if <see cref="Element"/> is in processing now</para>
 		/// <para>Otherwise value is equal to <see cref="Delay"/></para>
 		/// </remarks>
-		protected int _readyIn;
-
-		public virtual int ReadyIn
-		{
-			get { return this._readyIn; }
-			set { this._readyIn = value != 0 ? value : this.Delay; }
-		}
+		public virtual int ReadyIn { get; set; }
 
 		/// <summary>
 		/// Represents number of <see cref="Model.Time"/> required for processing
@@ -43,6 +48,10 @@ namespace ImitationLib.Elements.Core
 		/// Processes <see cref="Transact"/>
 		/// </summary>
 		/// <param name="time"><see cref="Model.Time"/> when <see cref="Transact"/> entered <see cref="Element"/></param>
-		public abstract void Process(int time);
+		public virtual void Process(int time)
+		{
+			var temp = this.Transacts.Peek();
+			temp.LifeTime = $"{temp} is processed in {this} at {time}";
+		}
 	}
 }
