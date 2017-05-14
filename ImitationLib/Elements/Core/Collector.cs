@@ -5,6 +5,14 @@ namespace ImitationLib.Elements.Core
 {
 	public abstract class Collector : Element, ITaker
 	{
+		protected Collector(int delay) : base(delay)
+		{
+		}
+
+		protected Collector(int delay, int capacity) : base(delay, capacity)
+		{
+		}
+
 		/// <summary>
 		/// <seealso cref="ITaker.Take"/>
 		/// </summary>
@@ -12,7 +20,7 @@ namespace ImitationLib.Elements.Core
 		/// <param name="time"></param>
 		public virtual void Take(Transact transact, int time)
 		{
-			if (this._capacity != Constants.InfiniteQueueCapacity && this.Transacts.Count >= this._capacity)
+			if (this.Capacity != Constants.InfiniteQueueCapacity && this.Transacts.Count >= this.Capacity)
 			{
 				Logger.Log.Warn($"{this} is overcrowded at {time}");
 				throw new Exception($"{transact} is skipped by {this} at {time}, because of overcrowding");
@@ -25,7 +33,9 @@ namespace ImitationLib.Elements.Core
 		/// <summary>
 		/// Collects <see cref="Transact"/>
 		/// </summary>
-		protected virtual void Collect() {}
+		protected virtual void Collect()
+		{
+		}
 
 		/// <summary>
 		/// <seealso cref="Element.Process"/>
