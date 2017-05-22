@@ -1,22 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using ImitationLib.Elements.Core;
 using ImitationLib.Utils;
 
 namespace ImitationLib.Elements
 {
-	// TODO: rename Enter class
-	public sealed class Enter : Generator
+	public sealed class Entrance : Generator
 	{
 		private readonly Random _random;
 
-		public Enter(int delay, int count)
+		public Entrance(int delay, int count) : base(delay, count)
 		{
 			this._random = new Random(delay);
-			this._count = count;
-			this.Delay = delay;
 			this.ReadyIn = delay;
-			this.Transacts = new Queue<Transact>();
 		}
 
 		public override void Process(int time)
